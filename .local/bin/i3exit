@@ -1,0 +1,31 @@
+#!/bin/bash
+############################################################
+#
+############################################################
+
+function lock {
+    i3lock-fancy -p
+}
+
+case "$1" in
+    lock)
+        lock
+        ;;
+    logout)
+        i3-msg exit
+        ;;
+    suspend)
+        sudo systemctl suspend
+        ;;
+    reboot)
+        sudo systemctl reboot
+        ;;
+    poweroff)
+        sudo systemctl poweroff
+        ;;
+    *)
+        echo "Usage: $0 {lock|logout|suspend|reboot|poweroff}"
+        exit 2
+esac
+
+exit 0
