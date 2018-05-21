@@ -4,3 +4,6 @@
 [submodule ".config/base16-i3"]
 	path = .config/base16-i3
 	url = https://github.com/khamer/base16-i3.git
+[submodule ".config/base16-shell"]
+	path = .config/base16-shell
+	url = git@github.com:mikebarkmin/base16-shell.git
