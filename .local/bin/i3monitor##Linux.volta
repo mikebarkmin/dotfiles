@@ -1,0 +1,50 @@
+#!/bin/sh
+
+usage() {
+cat << EOI
+Usage:
+ i3monitor < thunderbolt | hdmi > < intern | extern | clone | extend >
+
+Optionen:
+  intern   Nur internen Bildschirm verwenden
+  extern   Nur externer Bildschirm verwenden
+  clone    Gleiche Ausgabe auf beiden Bildschirmen
+  extend   Bild auf externem Bildschirm erweitern
+EOI
+
+}
+
+INTERN="eDP-1"
+
+case "$1" in
+    thunderbolt)
+        EXTERN="HDMI-2"
+        EXTERN2="HDMI-1"
+        ;;
+    *)
+        EXTERN="HDMI-1"
+        EXTERN2="HDMI-2"
+        ;;
+esac
+
+case "$2" in
+    intern)
+        xrandr --output $EXTERN --off --output $EXTERN2 --off --output $INTERN --auto
+        ;;
+    extern)
+        xrandr --output $EXTERN --auto --output $EXTERN2 --off --output $INTERN --off
+        ;;
+    clone)
+        CLONERES=`xrandr --query | awk '/^ *[0-9]*x[0-9]*/{ print $1 }' | sort -n | uniq -d | tail -1`
+        xrandr --output $INTERN --mode $CLONERES --pos 0x0 --output $EXTERN --mode $CLONERES --pos 0x0 --output $EXTERN2 --off
+        ;;
+    extend)
+        xrandr --output $INTERN --auto --output $EXTERN --auto --left-of $INTERN --output $EXTERN2 --off
+        ;;
+    *)
+        usage
+        ;;
+esac
+
+exit 0
+
