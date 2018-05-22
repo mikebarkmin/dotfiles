@@ -43,7 +43,8 @@ volume master {
 }
 
 battery all {
-	format = "%status %percentage"
+	format = "%status %percentage %remaining"
+	hide_seconds = true
 	integer_battery_capacity = true
 	last_full_capacity = true
 	format_down = " No Battery"

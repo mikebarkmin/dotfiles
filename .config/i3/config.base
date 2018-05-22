@@ -245,6 +245,11 @@ mode "$mode_audio" {
     bindsym Escape mode "default"
 }
 
+assign [class="^Zotero$"] $w6
+assign [class="^Thunderbird$"] $w7
+assign [class="^Spotify$"] $w8
+for_window [class="Spotify"] move to workspace $w8
+
 # no caps lock
 exec_always setxkbmap -layout de -model pc105 -option caps:escape
 
