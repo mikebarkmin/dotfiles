@@ -33,6 +33,9 @@ font pango:Inconsolata Nerd Font Mono 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# do not follow mouse
+focus_follows_mouse no
+
 # start a terminal
 bindsym $mod+Return exec tilix
 
@@ -98,16 +101,31 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # define names for workspaces with some nice symbols
-set $w1 1:爵
-set $w2 2:
-set $w3 3:
-set $w4 4:
-set $w5 5:
-set $w6 6:阮
-set $w7 7:
-set $w8 8:
-set $w9 9:
-set $w10 10:ﬦ
+set $w1 1
+set $w2 2
+set $w3 3
+set $w4 4
+set $w5 5
+set $w6 6
+set $w7 7
+set $w8 8
+set $w9 9
+set $w10 10
+
+# assign worksapce to output
+set $monext1 HDMI-1
+set $monint eDP-1
+
+workspace $w1 output $monext1
+workspace $w2 output $monext1
+workspace $w3 output $monext1
+workspace $w4 output $monext1
+workspace $w5 output $monext1
+workspace $w6 output $monint
+workspace $w7 output $monint
+workspace $w8 output $monint
+workspace $w9 output $monint
+workspace $w10 output $monint
 
 # switch to workspace
 bindsym $mod+1 workspace $w1
@@ -239,6 +257,8 @@ exec zotero &
 exec thunderbird &
 exec nextcloud &
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon &
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+exec nm-applet &
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
