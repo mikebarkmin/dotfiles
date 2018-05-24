@@ -4,6 +4,10 @@
 # be run from within $HOME (assuming this is the root of your dotfiles)
 cd "$HOME"
 
+if type apt 2>/dev/null; then
+	sudo sh ./setup_ubuntu
+fi
+
 echo "Init submodules"
 yadm submodule update --recursive --init
 
