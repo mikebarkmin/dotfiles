@@ -75,3 +75,6 @@ apt install -y xbacklight
 echo "create directories"
 mkdir /home/$user/Sources
 chown -R $user /home/$user/Sources
+
+echo "install platformio"
+python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/develop/scripts/get-platformio.py)"
