@@ -23,6 +23,7 @@ apt install -y python python3
 apt install -y python-pip python3-pip
 pip install neovim
 pip3 install neovim
+apt install -y papirus-icon-theme
 
 # install docker
 echo "install docker"
