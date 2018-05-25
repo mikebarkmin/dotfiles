@@ -70,6 +70,8 @@ apt install -y vlc
 echo "install utils"
 apt install -y policykit-1-gnome
 apt install -y xbacklight
+apt install -y nitrogen
+apt install -y lxappearance
 
 echo "create directories"
 mkdir /home/$user/Sources
