@@ -7,7 +7,11 @@ Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'Shougo/denite.nvim'
 Plug 'mattn/emmet-vim'
+
+" Autocompletion and Snippets
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
 
 " R
 Plug 'jalvesaq/Nvim-R'
@@ -53,6 +57,8 @@ set errorbells
 set visualbell
 set synmaxcol=1000
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_start_length = 1 
+let g:deoplete#enable_smart_case = 1 
 
 " }}}
 " Vim Directories {{{
@@ -139,6 +145,24 @@ let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
 " }}}
+" Neosnippet {{{
+
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+" }}}
 " }}}
 
 " vim: set foldmethod=marker ts=2 sw=2 foldlevel=0 tw=80 :
+"
