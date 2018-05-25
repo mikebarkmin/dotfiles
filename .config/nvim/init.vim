@@ -14,18 +14,18 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
 " R
-Plug 'jalvesaq/Nvim-R'
+Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
 
 " Pandoc
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc', { 'for': 'markdown' }
+Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 
 " Latex
 Plug 'lervag/vimtex'
 
 " Javascript
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 
 " Spellchecking
 Plug 'rhysd/vim-grammarous'
