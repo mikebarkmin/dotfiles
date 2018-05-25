@@ -17,6 +17,7 @@ apt install -y zsh
 apt install -y vim-gtk3
 apt install -y neovim
 apt install -y emacs
+apt install silversearcher-ag
 apt install -y python python3
 apt install -y python-pip python3-pip
 pip install neovim
