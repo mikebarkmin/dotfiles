@@ -15,7 +15,12 @@ apt upgrade
 echo "install essentials"
 apt install -y zsh
 apt install -y vim-gtk3
+apt install -y neovim
 apt install -y emacs
+apt install -y python python3
+apt install -y python-pip python3-pip
+pip install neovim
+pip3 install neovim
 
 # install docker
 echo "install docker"
