@@ -16,3 +16,6 @@
 [submodule ".config/base16-xresources"]
 	path = .config/base16-xresources
 	url = https://github.com/chriskempson/base16-xresources.git
+[submodule ".themes/Ant-Dracula"]
+	path = .themes/Ant-Dracula
+	url = https://github.com/EliverLara/Ant-Dracula.git
