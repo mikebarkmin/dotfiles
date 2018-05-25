@@ -97,3 +97,5 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim=nvim
+
+export BASE16_SHELL_HOOKS=$HOME/.config/base16-shell/hooks
