@@ -39,7 +39,7 @@ case "$2" in
         xrandr --output $INTERN --mode $CLONERES --pos 0x0 --output $EXTERN --mode $CLONERES --pos 0x0 --output $EXTERN2 --off
         ;;
     extend)
-        xrandr --output $INTERN --auto --output $EXTERN --auto --left-of $INTERN --output $EXTERN2 --off
+        xrandr --output $INTERN --auto --output $EXTERN --auto --above $INTERN --output $EXTERN2 --off
         ;;
     *)
         usage
