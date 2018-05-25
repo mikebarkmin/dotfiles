@@ -36,7 +36,7 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # start a terminal
-bindsym $mod+Return exec tilix
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+q kill
@@ -251,6 +251,10 @@ exec_always setxkbmap -layout de -model pc105 -option caps:escape
 # floating windows
 for_window [window_role="^toolbox_window$"] floating enable
 for_window [window_role="^pop-up$"] floating enable
+
+# put terminal into scratchpad
+for_window [instance="urxvt_scratchpad"] move scratchpad
+exec --no-startup-id urxvt -name urxvt_scratchpad
 
 # autostart application
 exec zotero &

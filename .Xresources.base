@@ -1,0 +1,59 @@
+!-------------------------------------------------------------------------------
+! Xft settings
+!-------------------------------------------------------------------------------
+
+Xft.dpi:                    96
+Xft.antialias:              rgba
+Xft.rgba:                   rgb
+Xft.hinting:                true
+Xft.hintstyle:              hintfull
+Xft.lcdfilter:              lcdfilter
+
+!-------------------------------------------------------------------------------
+! URxvt
+!-------------------------------------------------------------------------------
+
+URxvt.internalBorder:    5
+URxvt.externalBorder:    0
+URxvt.depth:             32
+URxvt.saveLines:         10000
+URxvt*geometry:          96x30
+URxvt*terminalName:      rxvt-unicode-256color
+URxvt*visualBell: false
+
+!! Scrollbar
+URxvt.scrollBar:         false
+URxvt*scrollTtyOutput:   false
+URxvt*scrollWithBuffer:  true
+URxvt*scrollTtyKeypress: true
+
+!! Fonts
+#define fonts xft:FuraMono Nerd Font:size=10,\
+              xft:Inconsolata Nerd Font Mono:size=10,
+
+URxvt*font: fonts
+URxvt*boldMode:          true
+URxvt*boldFont: fonts
+URxvt*letterSpace: true
+
+URxvt*saveLines: 10000
+URxvt*locale: 1
+URxvt*utf8: 1
+URxvt*utf8Title: 1
+URxvt*selectToClipboard: true
+URxvt*scrollBar: false
+URxvt*urlLauncher: chromium
+
+URxvt*bellIsUrgent: 1
+URxvt*borderWidth: 0
+URxvt*metaSendsEscape: true
+URxvt*depth: 32
+
+URxvt.perl-ext-common: default,matcher,resize-font,clipboard
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.matcher.button: 1
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt*background: rgb:28/29/36
