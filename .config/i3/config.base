@@ -112,10 +112,6 @@ set $w8 8
 set $w9 9
 set $w10 10
 
-# assign worksapce to output
-set $monext1 HDMI-1
-set $monint eDP-1
-
 workspace $w1 output $monext1
 workspace $w2 output $monext1
 workspace $w3 output $monext1
