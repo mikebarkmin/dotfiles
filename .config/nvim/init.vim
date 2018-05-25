@@ -48,7 +48,7 @@ nnoremap <leader>tf :NERDTreeToggle<CR>
 nnoremap <leader>fb :Denite buffer<CR>
 nnoremap <leader>ff :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
 nnoremap <leader>fg :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
-map <leader>a :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
+nnoremap <leader>fa :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
 " }}}
 
 " General Settings {{{
@@ -70,7 +70,9 @@ let g:deoplete#enable_smart_case = 1
 " }}}
 " Tabs and Indents {{{
 " ----------------
-set textwidth=80
+set textwidth=0
+set wrapmargin=0
+set nowrap
 set tabstop=2
 set smarttab
 set autoindent
