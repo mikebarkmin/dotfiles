@@ -134,6 +134,12 @@ bindsym $mod+8 workspace $w8
 bindsym $mod+9 workspace $w9
 bindsym $mod+0 workspace $w10
 
+# move focused workspace to monitor
+bindsym $mod+mod1+Shift+j move workspace to output up
+bindsym $mod+mod1+Shift+k move workspace to output down
+bindsym $mod+mod1+Shift+l move workspace to output right
+bindsym $mod+mod1+Shift+h move workspace to output left
+#
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $w1
 bindsym $mod+Shift+2 move container to workspace $w2

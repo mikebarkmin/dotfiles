@@ -14,16 +14,16 @@ EOI
 
 }
 
-INTERN="eDP-1"
+INTERN="eDP1"
 
 case "$1" in
     thunderbolt)
-        EXTERN="HDMI-1"
-        EXTERN2="HDMI-2"
+        EXTERN="HDMI1"
+        EXTERN2="HDMI2"
         ;;
     *)
-        EXTERN="HDMI-2"
-        EXTERN2="HDMI-1"
+        EXTERN="HDMI2"
+        EXTERN2="HDMI1"
         ;;
 esac
 
