@@ -13,7 +13,7 @@ apt update
 apt upgrade
 
 echo "install essentials"
-apt install -y rxvt-unicode
+apt install -y rxvt
 apt install -y zsh
 apt install -y vim-gtk3
 apt install -y neovim
@@ -21,6 +21,7 @@ apt install -y emacs
 apt install -y silversearcher-ag
 apt install -y python python3
 apt install -y python-pip python3-pip
+apt install -y htop
 pip install neovim
 pip3 install neovim
 
@@ -91,3 +92,6 @@ chown -R $user /home/$user/Sources
 
 echo "install platformio"
 python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/develop/scripts/get-platformio.py)"
+
+echo "install r"
+apt install r-base

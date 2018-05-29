@@ -42,13 +42,15 @@ call plug#end()
 " Global Mappings {{{
 " ---------------
 let g:mapleader="\<Space>"
-let g:maplocalleader=';'
+let g:maplocalleader=','
 nnoremap <leader>th :set hlsearch!<CR>
 nnoremap <leader>tf :NERDTreeToggle<CR>
 nnoremap <leader>fb :Denite buffer<CR>
 nnoremap <leader>ff :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
 nnoremap <leader>fg :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
 nnoremap <leader>fa :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
+vmap <Space> <Plug>RDSendSelection
+nmap <Space> <Plug>RDSendLine
 " }}}
 
 " General Settings {{{
