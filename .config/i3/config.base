@@ -334,3 +334,4 @@ client.placeholder      $base00 $base00 $base05 $base00 $base00
 client.background $base07
 
 exec_always --no-startup-id xsetroot -solid "$base05"
+exec_alawys --no-startup-id xrdb -merge ~/.Xresources 
