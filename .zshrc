@@ -39,7 +39,7 @@ ZSH_THEME="robbyrussell"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -61,9 +61,15 @@ ZSH_THEME="robbyrussell"
 plugins=(
   git
   ssh-agent
+  docker
+  yarn
 )
 
 source $ZSH/oh-my-zsh.sh
+
+if [[ $TILIX_ID ]]; then
+        source /etc/profile.d/vte.sh
+fi
 
 # Base16
 BASE16_SHELL=$HOME/.config/base16-shell/

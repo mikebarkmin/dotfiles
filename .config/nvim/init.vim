@@ -24,8 +24,10 @@ Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 Plug 'lervag/vimtex'
 
 " Javascript
+Plug 'mklabs/mdn.vim'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
 " Spellchecking
 Plug 'rhysd/vim-grammarous'
