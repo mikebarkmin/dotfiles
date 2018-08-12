@@ -63,6 +63,7 @@ plugins=(
   ssh-agent
   docker
   yarn
+  last-working-dir
 )
 
 source $ZSH/oh-my-zsh.sh
