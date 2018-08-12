@@ -103,6 +103,7 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 apt update
 apt install -y yarn
 curl -L https://www.npmjs.com/install.sh | sh
+apt install -y npm
 
 echo "install python packages"
 pip install neovim

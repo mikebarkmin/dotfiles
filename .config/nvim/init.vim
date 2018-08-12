@@ -7,6 +7,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'Shougo/denite.nvim'
 Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-surround'
+Plug 'Raimondi/delimitMate'
 
 " Autocompletion and Snippets
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -28,6 +30,9 @@ Plug 'mklabs/mdn.vim'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+
+" JSON
+Plug 'leshill/vim-json'
 
 " Spellchecking
 Plug 'rhysd/vim-grammarous'
@@ -53,6 +58,12 @@ nnoremap <leader>fg :DeniteProjectDir -buffer-name=git -direction=top file_rec/g
 nnoremap <leader>fa :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
 vmap <Space> <Plug>RDSendSelection
 nmap <Space> <Plug>RDSendLine
+
+" quickfix
+map <C-j> :cn<CR>
+map <C-k> :cp<CR>
+map <leader>ch :noh<CR>
+
 " }}}
 
 " General Settings {{{
@@ -67,6 +78,9 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 1 
 let g:deoplete#enable_smart_case = 1 
 
+" autocd to current dir of file
+set autochdir
+
 " }}}
 " Vim Directories {{{
 " ---------------
@@ -78,6 +92,8 @@ set textwidth=0
 set wrapmargin=0
 set nowrap
 set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set smarttab
 set autoindent
 set smartindent
@@ -141,6 +157,9 @@ endfunction
 
 " Plugins {{{
 " -------
+" vim-jsx {{{
+let g:jsx_ext_required = 0
+" }}}
 " Denite {{{
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
@@ -178,9 +197,11 @@ let g:ale_lint_on_enter = 1 " Less distracting when opening a new file
 let g:ale_fix_on_save = 1
 
 let g:ale_fixers = {
-\   'javascript': ['prettier'],
+\   'javascript': ['prettier', 'eslint'],
 \   'python': ['autopep8', 'isort', 'yapf']
 \}
+
+let g:ale_javascript_prettier_options = '--single-quote'
 
 " }}}
 " Neosnippet {{{

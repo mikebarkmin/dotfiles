@@ -9,6 +9,9 @@ export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
+# allow tern to load all files
+ulimit -n 2048
+
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
 # cause zsh load theme from this variable instead of

@@ -172,6 +172,9 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 bindsym $mod+Shift+plus move scratchpad
 bindsym $mod+plus scratchpad show
 
+# screenshots
+bindsym Print exec flameshot gui
+
 # logout mode system
 set $logout_system (l) lock, (o) logout, (s) suspend, (r) reboot, (p) poweroff
 bindsym $mod+Delete mode "$logout_system"
@@ -322,8 +325,6 @@ for_window [class="^.*"] border pixel 4
 
 gaps inner 15
 gaps outer 5
-
-smart_gaps on
 
 
 # Basic color configuration using the Base16 variables for windows and borders.
