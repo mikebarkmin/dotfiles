@@ -39,7 +39,7 @@ ulimit -n 2048
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -67,6 +67,8 @@ plugins=(
   docker
   yarn
   last-working-dir
+  colored-man-pages
+  httpie
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -108,5 +110,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim=nvim
+alias com="cd ~/Sources/commoop"
+alias s="cd ~/Sources"
 
 export BASE16_SHELL_HOOKS=$HOME/.config/base16-shell/hooks
