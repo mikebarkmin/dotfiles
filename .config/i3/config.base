@@ -229,14 +229,26 @@ mode "$mode_thunderbolt" {
 }
 
 #display settings
-set $mode_settings (a) audio
+set $mode_settings (a) audio, (d) disturb
 bindsym F1 mode "$mode_settings"
 mode "$mode_settings" {
     bindsym a mode "$mode_audio"
+    bindsym d mode "$mode_disturb"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
+}
+
+# do not disturb mode system
+set $mode_disturb (p) pause, (r) resume
+mode "$mode_disturb" {
+  bindsym p exec killall -SIGUSR1 dunst, mode "default"
+  bindsym r exec killall -SIGUSR2 dunst, mode "default"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
 }
 
 # audio mode system
@@ -257,6 +269,7 @@ for_window [class="Spotify"] move to workspace $w8
 
 # no caps lock
 exec_always setxkbmap -layout de -model pc105 -option caps:escape
+exec_always dunst
 
 # floating windows
 for_window [window_role="^toolbox_window$"] floating enable
