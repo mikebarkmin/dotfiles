@@ -9,6 +9,7 @@ Plug 'Shougo/denite.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 Plug 'Raimondi/delimitMate'
+Plug 'markonm/traces.vim'
 
 " Autocompletion and Snippets
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }

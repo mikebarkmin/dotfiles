@@ -16,6 +16,7 @@ echo "install essentials"
 apt install -y rxvt
 apt install -y zsh
 apt install -y vim-gtk3
+add-apt-repository ppa:neovim-ppa/stable -y
 apt install -y neovim
 apt install -y emacs
 apt install -y silversearcher-ag
