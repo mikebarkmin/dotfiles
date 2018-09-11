@@ -25,6 +25,7 @@ Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 
 " Latex
 Plug 'lervag/vimtex'
+Plug 'mhinz/neovim-remote'
 
 " Javascript
 Plug 'mklabs/mdn.vim'
@@ -75,9 +76,6 @@ map <leader>ch :noh<CR>
 set errorbells
 set visualbell
 set synmaxcol=1000
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_start_length = 1 
-let g:deoplete#enable_smart_case = 1 
 
 " autocd to current dir of file
 set autochdir
@@ -154,6 +152,15 @@ function! FoldText()
   return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
 endfunction
 " }}}
+" Autocompletion {{
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_start_length = 1 
+let g:deoplete#enable_smart_case = 1 
+if !exists('g:deoplete#omni#input_patterns')
+      let g:deoplete#omni#input_patterns = {}
+  endif
+let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+" }}
 " }}}
 
 " Plugins {{{
@@ -220,6 +227,12 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expan
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+
+" }}}
+" Vimtext {{{
+
+let g:vimtex_compiler_progname = 'nvr'
+au BufRead,BufNewFile *.text let &l:flp = '^\s*\\\(end\|item\)\>'
 
 " }}}
 " }}}
