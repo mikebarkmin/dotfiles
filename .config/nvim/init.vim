@@ -58,8 +58,6 @@ nnoremap <leader>fb :Denite buffer<CR>
 nnoremap <leader>ff :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
 nnoremap <leader>fg :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
 nnoremap <leader>fa :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
-vmap <Space> <Plug>RDSendSelection
-nmap <Space> <Plug>RDSendLine
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
 function ToggleWrap()
   if &wrap
@@ -223,14 +221,6 @@ call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
-" }}}
-" Emmet {{{
-let g:user_emmet_leader_key='<Tab>'
-let g:user_emmet_settings = {
-  \ 'javascript.jsx' : {
-    \ 'extends' : 'jsx',
-  \ },
-\}
 " }}}
 " Ale {{{
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
