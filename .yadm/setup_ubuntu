@@ -85,6 +85,7 @@ apt install -y xbacklight
 apt install -y nitrogen
 apt install -y lxappearance
 apt install -y flameshot
+apt install -y redshift redshift-gtk
 
 echo "create directories"
 mkdir /home/$user/Sources
