@@ -108,9 +108,17 @@ map <leader>ch :noh<CR>
 set errorbells
 set visualbell
 set synmaxcol=1000
+set hidden
 
 " autocd to current dir of file
 set autochdir
+
+function PrintFile(fname)
+   call system("gtklp " . a:fname)
+   call delete(a:fname)
+   return v:shell_error
+endfunction
+set printexpr=PrintFile(v:fname_in)
 
 " }}}
 " Vim Directories {{{
@@ -226,7 +234,12 @@ call denite#custom#var('grep', 'final_opts', [])
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
 let g:ale_lint_on_enter = 1 " Less distracting when opening a new file
+let g:ale_set_highlights = 0
 let g:ale_fix_on_save = 1
+hi ALEErrorSign ctermfg=Red
+hi ALEError ctermbg=Red ctermfg=Black
+hi ALEWarning ctermbg=Yellow ctermfg=Black
+hi ALEInfo ctermbg=Cyan ctermfg=Black
 
 let g:ale_fixers = {
 \   'javascript': ['prettier', 'eslint'],
