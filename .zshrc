@@ -114,3 +114,8 @@ alias com="cd ~/Sources/commoop"
 alias s="cd ~/Sources"
 
 export BASE16_SHELL_HOOKS=$HOME/.config/base16-shell/hooks
+
+# virtualenvwrapper
+export WORKON_HOME=~/.virtualenv
+mkdir -p $WORKON_HOME
+source /usr/local/bin/virtualenvwrapper.sh

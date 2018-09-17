@@ -80,6 +80,8 @@ apt install -y spotify-client
 apt install -y vlc
 
 echo "install utils"
+apt install -y virtualenv
+apt install -y virtualenvwrapper
 apt install -y policykit-1-gnome
 apt install -y xbacklight
 apt install -y nitrogen
@@ -112,5 +114,6 @@ pip install neovim
 pip3 install neovim
 pip  install autopep8 isort yapf
 pip3 install autopep8 isort yapf
+pip3 install virtualenvwrapper
 
 ln -s /etc/profile.d/vte-*.sh /etc/profile.d/vte.sh
