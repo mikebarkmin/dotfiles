@@ -15,6 +15,10 @@ Plug 'markonm/traces.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 " R
 Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
@@ -31,7 +35,6 @@ Plug 'mhinz/neovim-remote'
 Plug 'mklabs/mdn.vim'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
 " JSON
 Plug 'leshill/vim-json'
@@ -59,6 +62,8 @@ nnoremap <leader>ff :DeniteProjectDir -buffer-name=files -direction=top file_rec
 nnoremap <leader>fg :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
 nnoremap <leader>fa :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
+" force write with sude
+cnoremap w!! w !sudo tee "%" > /dev/null
 function ToggleWrap()
   if &wrap
     echo "Wrap OFF"
@@ -119,6 +124,7 @@ function PrintFile(fname)
    return v:shell_error
 endfunction
 set printexpr=PrintFile(v:fname_in)
+let g:sudo_askpass='/usr/lib/openssh/gnome-ssh-askpass'
 
 " }}}
 " Vim Directories {{{
@@ -192,7 +198,7 @@ function! FoldText()
   return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
 endfunction
 " }}}
-" Autocompletion {{
+" Autocompletion {{{
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_start_length = 1 
 let g:deoplete#enable_smart_case = 1 
@@ -200,11 +206,31 @@ if !exists('g:deoplete#omni#input_patterns')
       let g:deoplete#omni#input_patterns = {}
   endif
 let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
-" }}
+" }}}
 " }}}
 
 " Plugins {{{
 " -------
+" LanguageClient {{{
+let g:LanguageClient_autoStart = 1
+
+let g:LanguageClient_serverCommands = {}
+
+if executable('pyls')
+  let g:LanguageClient_serverCommands.python = ['pyls']
+endif
+
+if executable('javascript-typescript-stdio')
+  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
+  let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
+  let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
+  let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.less = ['css-languageserver', '--stdio']
+  let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
+endif
+
+" }}}
 " vim-jsx {{{
 let g:jsx_ext_required = 0
 " }}}

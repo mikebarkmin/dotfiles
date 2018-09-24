@@ -116,4 +116,8 @@ pip  install autopep8 isort yapf
 pip3 install autopep8 isort yapf
 pip3 install virtualenvwrapper
 
+echo "install language-servers"
+npm i -g javascript-typescript-langserver
+pip install 'python-language-server[all]'
+
 ln -s /etc/profile.d/vte-*.sh /etc/profile.d/vte.sh
