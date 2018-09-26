@@ -295,6 +295,7 @@ endif
 " Vimtext {{{
 
 let g:vimtex_compiler_progname = 'nvr'
+let g:tex_conceal = ''
 au BufRead,BufNewFile *.text let &l:flp = '^\s*\\\(end\|item\)\>'
 
 " }}}
