@@ -80,6 +80,7 @@ apt install -y spotify-client
 apt install -y vlc
 
 echo "install utils"
+apt install -y graphviz
 apt install -y virtualenv
 apt install -y virtualenvwrapper
 apt install -y policykit-1-gnome
@@ -98,6 +99,7 @@ python -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/
 
 echo "install r"
 apt install r-base
+apt install libxml2-dev
 apt install libcurl4-openssl-dev
 apt install libssl-dev
 
