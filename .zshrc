@@ -112,6 +112,9 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 alias vim=nvim
 alias com="cd ~/Sources/commoop"
 alias s="cd ~/Sources"
+alias www='python -m SimpleHTTPServer 8000'
+alias ping='ping -c 5'
+alias ipe='curl ipinfo.io/ip'
 
 export BASE16_SHELL_HOOKS=$HOME/.config/base16-shell/hooks
 
