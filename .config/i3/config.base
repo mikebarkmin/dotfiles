@@ -37,7 +37,7 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # start a terminal
-bindsym $mod+Return exec tilix
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+q kill
