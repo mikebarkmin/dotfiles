@@ -20,6 +20,7 @@ URxvt.saveLines:         10000
 URxvt*geometry:          96x30
 URxvt*terminalName:      rxvt-unicode-256color
 URxvt*visualBell: false
+URxvt.print-pipe: "cat > /dev/null"
 
 !! Scrollbar
 URxvt.scrollBar:         false
