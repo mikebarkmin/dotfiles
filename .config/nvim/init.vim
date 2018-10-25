@@ -36,6 +36,9 @@ Plug 'mklabs/mdn.vim'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 
+" Markdown
+Plug 'shime/vim-livedown'
+
 " JSON
 Plug 'leshill/vim-json'
 

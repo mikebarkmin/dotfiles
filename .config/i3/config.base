@@ -266,6 +266,7 @@ assign [class="^Zotero$"] $w6
 assign [class="^Thunderbird$"] $w7
 assign [class="^Spotify$"] $w8
 for_window [class="Spotify"] move to workspace $w8
+# for_window [class="^bluej.*$"] floating enable floating enable
 
 # no caps lock
 exec_always setxkbmap -layout de -model pc105 -option caps:escape
@@ -280,6 +281,7 @@ for_window [instance="urxvt_scratchpad"] move scratchpad
 exec --no-startup-id urxvt -name urxvt_scratchpad
 
 # autostart application
+exec compton &
 exec zotero &
 exec thunderbird &
 exec nextcloud &
@@ -350,4 +352,4 @@ client.urgent           $base08 $base08 $base00 $base08 $base08
 client.placeholder      $base00 $base00 $base05 $base00 $base00
 client.background $base07
 
-exec_always --no-startup-id xsetroot -solid "$base05"
+exec_always --no-startup-id hsetroot -solid "$base05"

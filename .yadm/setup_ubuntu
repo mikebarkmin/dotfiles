@@ -90,6 +90,8 @@ apt install -y lxappearance
 apt install -y flameshot
 apt install -y redshift redshift-gtk
 apt install -y gir1.2-gconf-2.0
+apt install -y compton
+apt install -y hsetroot
 
 echo "create directories"
 mkdir /home/$user/Sources
