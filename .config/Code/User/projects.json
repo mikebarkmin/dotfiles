@@ -1,0 +1,20 @@
+[
+  {
+    "name": "commoop-web",
+    "rootPath": "$home/Sources/commoop/commoop-web",
+    "paths": [],
+    "group": "commoop"
+  },
+  {
+    "name": "commoop-api",
+    "rootPath": "$home/Sources/commoop/commoop-api",
+    "paths": [],
+    "group": "commoop"
+  },
+  {
+    "name": "processing-library-scratch",
+    "rootPath": "$home/Sources/processing/processing-library-scratch",
+    "paths": [],
+    "group": "processing"
+  }
+]
