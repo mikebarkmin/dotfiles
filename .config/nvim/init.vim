@@ -320,8 +320,8 @@ let g:vimtex_compiler_latexmk = {
         \   '-verbose',
         \   '-file-line-error',
         \   '-synctex=1',
-        \   '--shell-escape',
         \   '-interaction=nonstopmode',
+        \   '--shell-escape',
         \ ],
         \}
 
@@ -329,6 +329,11 @@ let g:vimtex_compiler_latexmk = {
 " }}}
 
 " FileType Settings {{{
+function! MyFormatExpr(start, end)
+    silent execute a:start.','.a:end.'s/\(\<vgl\|e\.g\|\<al\)\@<![.!?]\zs /\r/g'
+endfunction
+
+autocmd FileType tex set formatexpr=MyFormatExpr(v:lnum,v:lnum+v:count-1)
 " }}}
 
 " vim: set foldmethod=marker ts=2 sw=2 foldlevel=0 tw=80 :
