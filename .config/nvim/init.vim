@@ -228,6 +228,10 @@ if executable('pyls')
   let g:LanguageClient_serverCommands.python = ['pyls']
 endif
 
+if executable('jdtls')
+  let g:LanguageClient_serverCommands.java = ['jdtls']
+endif
+
 if executable('javascript-typescript-stdio')
   let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
   let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
@@ -300,13 +304,31 @@ if has('conceal')
 endif
 
 " }}}
-" Vimtext {{{
+" Vimtex {{{
 
 let g:vimtex_compiler_progname = 'nvr'
 let g:tex_conceal = ''
-au BufRead,BufNewFile *.text let &l:flp = '^\s*\\\(end\|item\)\>'
+au BufRead,BufNewFile *.tex let &l:flp = '^\s*\\\(end\|item\)\>'
+let g:vimtex_compiler_latexmk = {
+        \ 'backend' : 'nvim',
+        \ 'background' : 1,
+        \ 'build_dir' : 'build',
+        \ 'callback' : 1,
+        \ 'continuous' : 1,
+        \ 'executable' : 'latexmk',
+        \ 'options' : [
+        \   '-verbose',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '--shell-escape',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
 
 " }}}
+" }}}
+
+" FileType Settings {{{
 " }}}
 
 " vim: set foldmethod=marker ts=2 sw=2 foldlevel=0 tw=80 :
