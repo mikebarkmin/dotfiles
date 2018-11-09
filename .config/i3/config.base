@@ -278,7 +278,7 @@ for_window [window_role="^pop-up$"] floating enable
 
 # put terminal into scratchpad
 for_window [instance="urxvt_scratchpad"] move scratchpad
-exec --no-startup-id urxvt -name urxvt_scratchpad
+exec urxvt -name urxvt_scratchpad
 
 # autostart application
 exec compton &
@@ -288,7 +288,6 @@ exec nextcloud &
 exec redshift-gtk &
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon &
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-exec flameshot &
 exec nm-applet &
 
 # resize window (you can also use the mouse for that)
@@ -339,8 +338,8 @@ bar {
 # Basic gaps configuration
 for_window [class="^.*"] border pixel 4
 
-gaps inner 15
-gaps outer 5
+# gaps inner 15
+# gaps outer 5
 
 
 # Basic color configuration using the Base16 variables for windows and borders.
