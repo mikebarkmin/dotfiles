@@ -8,8 +8,11 @@ Plug 'w0rp/ale'
 Plug 'Shougo/denite.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'Raimondi/delimitMate'
 Plug 'markonm/traces.vim'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'terryma/vim-multiple-cursors'
 
 " Autocompletion and Snippets
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
