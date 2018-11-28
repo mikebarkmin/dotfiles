@@ -16,5 +16,11 @@
     "rootPath": "$home/Sources/processing/processing-library-scratch",
     "paths": [],
     "group": "processing"
+  },
+  {
+    "name": "openpatch-itembank",
+    "rootPath": "$home/Sources/openpatch/itembank",
+    "paths": [],
+    "group": "openpatch"
   }
 ]

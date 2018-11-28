@@ -13,15 +13,16 @@ Plug 'Raimondi/delimitMate'
 Plug 'markonm/traces.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'lambdalisue/suda.vim'
 
 " Autocompletion and Snippets
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
 
 " R
 Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
@@ -33,6 +34,9 @@ Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 " Latex
 Plug 'lervag/vimtex'
 Plug 'mhinz/neovim-remote'
+
+" Python
+Plug 'tmhedberg/SimpylFold'
 
 " Javascript
 Plug 'mklabs/mdn.vim'
@@ -69,7 +73,8 @@ nnoremap <leader>fg :DeniteProjectDir -buffer-name=git -direction=top file_rec/g
 nnoremap <leader>fa :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
 " force write with sude
-cnoremap w!! w !sudo tee "%" > /dev/null
+" cnoremap w!! w !sudo tee "%" > /dev/null
+cnoremap w!! w suda://%
 function ToggleWrap()
   if &wrap
     echo "Wrap OFF"
@@ -103,6 +108,10 @@ function ToggleWrap()
   endif
 endfunction
 
+" folding
+nnoremap <expr> <f2> &foldlevel ? 'zM' :'zR'
+nnoremap <expr> <f3> 'za'
+
 
 " quickfix
 map <C-j> :cn<CR>
@@ -120,6 +129,8 @@ set errorbells
 set visualbell
 set synmaxcol=1000
 set hidden
+set splitbelow
+set splitright
 
 " autocd to current dir of file
 set autochdir
@@ -206,8 +217,8 @@ endfunction
 " }}}
 " Autocompletion {{{
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_start_length = 1 
-let g:deoplete#enable_smart_case = 1 
+let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#enable_smart_case = 1
 if !exists('g:deoplete#omni#input_patterns')
       let g:deoplete#omni#input_patterns = {}
   endif
@@ -217,35 +228,6 @@ let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
 " Plugins {{{
 " -------
-" LanguageClient {{{
-let g:LanguageClient_autoStart = 1
-
-let g:LanguageClient_serverCommands = {}
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-if executable('pyls')
-  let g:LanguageClient_serverCommands.python = ['pyls']
-endif
-
-if executable('jdtls')
-  let g:LanguageClient_serverCommands.java = ['jdtls']
-endif
-
-if executable('javascript-typescript-stdio')
-  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands['javascript.jsx'] = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-stdio']
-  let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.css = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.less = ['css-languageserver', '--stdio']
-  let g:LanguageClient_serverCommands.json = ['json-languageserver', '--stdio']
-endif
-
-" }}}
 " vim-jsx {{{
 let g:jsx_ext_required = 0
 " }}}
@@ -274,17 +256,31 @@ call denite#custom#var('grep', 'final_opts', [])
 " Ale {{{
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
+let g:ale_completion_enabled = 1
 let g:ale_lint_on_enter = 1 " Less distracting when opening a new file
-let g:ale_set_highlights = 0
+let g:ale_set_highlights = 1
 let g:ale_fix_on_save = 1
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
 hi ALEErrorSign ctermfg=Red
 hi ALEError ctermbg=Red ctermfg=Black
 hi ALEWarning ctermbg=Yellow ctermfg=Black
 hi ALEInfo ctermbg=Cyan ctermfg=Black
+hi ALEErrorLine ctermbg=Red ctermfg=Black
+
+nnoremap <silent> gi :ALEHover<CR>
+nnoremap <silent> gd :ALEGoToDefinition<CR>
+nnoremap <silent> gr :ALEFindReferences<CR>
 
 let g:ale_fixers = {
 \   'javascript': ['prettier', 'eslint'],
-\   'python': ['autopep8', 'isort', 'yapf']
+\   'python': ['autopep8', 'isort', 'yapf'],
+\   '*': ['trim_whitespace']
+\}
+
+let g:ale_linters = {
+\   'javascript': ['tsserver'],
+\   'python': ['flake8', 'pyls']
 \}
 
 let g:ale_javascript_prettier_options = '--single-quote'
