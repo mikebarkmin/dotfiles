@@ -16,7 +16,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'lambdalisue/suda.vim'
 
 " Autocompletion and Snippets
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 " Plug 'autozimu/LanguageClient-neovim', {
@@ -263,6 +263,7 @@ let g:ale_fix_on_save = 1
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_javascript_tsserver_use_global = 1
+set completeopt=menu,menuone,preview,noselect,noinsert
 hi ALEErrorSign ctermfg=Red
 hi ALEError ctermbg=Red ctermfg=Black
 hi ALEWarning ctermbg=Yellow ctermfg=Black
