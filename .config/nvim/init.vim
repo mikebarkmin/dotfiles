@@ -59,6 +59,7 @@ Plug 'reedes/vim-wordy'
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'sodapopcan/vim-twiggy'
 Plug 'airblade/vim-gitgutter'
 
@@ -357,6 +358,8 @@ let g:vimtex_compiler_latexmk = {
 " Twiggy {{{
 command Gbranch :Twiggy
 
+" }}}
+" fugitive-gitlab {{{
 " }}}
 " }}}
 
