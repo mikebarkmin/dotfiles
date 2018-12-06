@@ -1,0 +1,6 @@
+#!/bin/bash
+wget https://raw.github.com/smathot/zotero_installer/master/zotero_installer.sh \
+    -O /tmp/zotero_installer.sh
+chmod +x /tmp/zotero_installer.sh
+sudo /tmp/zotero_installer.sh
+
