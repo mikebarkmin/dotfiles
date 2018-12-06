@@ -14,11 +14,12 @@ Plug 'markonm/traces.vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'lambdalisue/suda.vim'
+Plug 'sjl/gundo.vim'
 
 " Autocompletion and Snippets
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+" Plug 'Shougo/neosnippet.vim'
+" Plug 'Shougo/neosnippet-snippets'
 " Plug 'autozimu/LanguageClient-neovim', {
 "     \ 'branch': 'next',
 "     \ 'do': 'bash install.sh',
@@ -67,6 +68,7 @@ let g:mapleader="\<Space>"
 let g:maplocalleader=','
 nnoremap <leader>th :set hlsearch!<CR>
 nnoremap <leader>tf :NERDTreeToggle<CR>
+nnoremap <leader>tu :GundoToggle<CR>
 nnoremap <leader>fb :Denite buffer<CR>
 nnoremap <leader>ff :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
 nnoremap <leader>fg :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
@@ -128,9 +130,29 @@ map <leader>ch :noh<CR>
 set errorbells
 set visualbell
 set synmaxcol=1000
-set hidden
 set splitbelow
 set splitright
+"
+" autoread and autowrite
+augroup save
+  au!
+  au FocusLost * wall
+augroup END
+set nohidden
+set nobackup
+set noswapfile
+set nowritebackup
+set autoread
+set autowrite
+set autowriteall
+
+" persistent-undo
+set undodir=~/.config/nvim/undo
+set undofile
+
+"
+" highlight merge conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " autocd to current dir of file
 set autochdir
