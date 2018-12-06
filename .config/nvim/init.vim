@@ -43,6 +43,8 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'mklabs/mdn.vim'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'moll/vim-node'
+
 
 " Markdown
 Plug 'shime/vim-livedown'
@@ -70,6 +72,7 @@ nnoremap <leader>th :set hlsearch!<CR>
 nnoremap <leader>tf :NERDTreeToggle<CR>
 nnoremap <leader>tu :GundoToggle<CR>
 nnoremap <leader>fb :Denite buffer<CR>
+nnoremap <leader>fo :Denite outline<CR>
 nnoremap <leader>ff :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
 nnoremap <leader>fg :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
 nnoremap <leader>fa :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
