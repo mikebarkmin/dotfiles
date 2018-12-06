@@ -1,0 +1,21 @@
+[user]
+	email = mike.barkmin@uni-due.de
+	name = Mike Barkmin
+	signingkey = 8B20732DF9F1E2D5C9CC2AC0B29BB3755EB40BF4
+[core]
+	excludesfile = ~/.gitignore
+  editor = "vim"
+[commit]
+  verbose = true
+[merge]
+  tool = nfugitive
+[mergetool "nfugitive"]
+  cmd = nvim -f -c "Gdiff" "$MERGED"
+[diff]
+  tool = nvimdiff2
+[difftool "nvimdiff2"]
+  cmd = nvim -d $LOCAL $REMOTE
+[init]
+	templatedir = ~/.git_template
+[alias]
+	ctags = !.git/hooks/ctags
