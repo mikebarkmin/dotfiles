@@ -23,6 +23,7 @@ apt install -y silversearcher-ag
 apt install -y python python3
 apt install -y python-pip python3-pip
 apt install -y htop
+apt install -y exuberant-ctags
 
 echo "install sweets"
 add-apt-repository ppa:papirus/papirus
