@@ -116,6 +116,11 @@ alias www='python -m SimpleHTTPServer 8000'
 alias ping='ping -c 5'
 alias ipe='curl ipinfo.io/ip'
 
+# Docker aliases
+alias dps='docker ps'
+alias dstop='docker stop $(docker ps -aq)'
+alias dkill='docker rm $(docker stop $(docker ps -aq))'
+
 export BASE16_SHELL_HOOKS=$HOME/.config/base16-shell/hooks
 
 # virtualenvwrapper

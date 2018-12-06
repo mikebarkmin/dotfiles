@@ -1,12 +1,13 @@
 [user]
 	email = mike.barkmin@uni-due.de
 	name = Mike Barkmin
-	signingkey = 8B20732DF9F1E2D5C9CC2AC0B29BB3755EB40BF4
+	signingkey = DB03AD0D8AF96072
 [core]
 	excludesfile = ~/.gitignore
   editor = "vim"
 [commit]
   verbose = true
+	gpgsign = true
 [merge]
   tool = nfugitive
 [mergetool "nfugitive"]
