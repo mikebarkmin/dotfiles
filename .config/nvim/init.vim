@@ -59,6 +59,7 @@ Plug 'reedes/vim-wordy'
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'sodapopcan/vim-twiggy'
 Plug 'airblade/vim-gitgutter'
 
 call plug#end()
@@ -117,7 +118,6 @@ endfunction
 nnoremap <expr> <f2> &foldlevel ? 'zM' :'zR'
 nnoremap <expr> <f3> 'za'
 
-
 " quickfix
 map <C-j> :cn<CR>
 map <C-k> :cp<CR>
@@ -167,6 +167,8 @@ function PrintFile(fname)
 endfunction
 set printexpr=PrintFile(v:fname_in)
 let g:sudo_askpass='/usr/lib/openssh/gnome-ssh-askpass'
+
+set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 
 " }}}
 " Vim Directories {{{
@@ -350,6 +352,10 @@ let g:vimtex_compiler_latexmk = {
         \   '--shell-escape',
         \ ],
         \}
+
+" }}}
+" Twiggy {{{
+command Gbranch :Twiggy
 
 " }}}
 " }}}
