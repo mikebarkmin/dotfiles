@@ -2,6 +2,7 @@
 " ----
 call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'mhinz/vim-startify'
 Plug 'chriskempson/base16-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
@@ -138,17 +139,11 @@ set splitbelow
 set splitright
 "
 " autoread and autowrite
-augroup save
-  au!
-  au FocusLost * wall
-augroup END
-set nohidden
+set hidden
 set nobackup
 set noswapfile
 set nowritebackup
 set autoread
-set autowrite
-set autowriteall
 
 " persistent-undo
 set undodir=~/.config/nvim/undo
