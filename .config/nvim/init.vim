@@ -3,7 +3,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'mhinz/vim-startify'
-Plug 'chriskempson/base16-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'Shougo/denite.nvim'
@@ -16,6 +15,10 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'lambdalisue/suda.vim'
 Plug 'sjl/gundo.vim'
+
+" Themes
+Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
 
 " Autocompletion and Snippets
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -153,6 +156,25 @@ set undofile
 " highlight merge conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
+" Spell Check
+let b:myLang=0
+let g:myLangList=["nospell","de_de","en_gb"]
+function! ToggleSpell()
+  let b:myLang=b:myLang+1
+  if b:myLang>=len(g:myLangList) | let b:myLang=0 | endif
+  if b:myLang==0
+    setlocal nospell
+  else
+    execute "setlocal spell spelllang=".get(g:myLangList, b:myLang)
+  endif
+  echo "spell checking language:" g:myLangList[b:myLang]
+endfunction
+
+set complete+=kspell
+
+nmap <silent> <F7> :call ToggleSpell()<CR>
+
+
 " autocd to current dir of file
 set autochdir
 
@@ -200,10 +222,16 @@ set number relativenumber
 set list
 set laststatus=2
 set colorcolumn=80
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+
+colorscheme gruvbox
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark="soft"
+set background=dark
+
+" if filereadable(expand("~/.vimrc_background"))
+"   let base16colorspace=256
+"   source ~/.vimrc_background
+" endif
 
 
 " }}}
