@@ -181,7 +181,7 @@ bindsym $mod+Delete mode "$logout_system"
 mode "$logout_system" {
     bindsym l exec $psst i3exit lock, mode "default"
     bindsym o exec $psst i3exit logout, mode "default"
-    bindsym s exec $psst i3exit suspend, mode "default"
+    bindsym s exec $psst i3exit lock-suspend, mode "default"
     bindsym r exec $psst i3exit reboot, mode "default"
     bindsym p exec $psst i3exit poweroff, mode "default"
 
