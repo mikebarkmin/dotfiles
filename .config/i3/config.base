@@ -290,6 +290,7 @@ exec nextcloud &
 exec redshift-gtk &
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon &
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+exec --no-startup-id i3battery -n &
 exec nm-applet &
 
 # resize window (you can also use the mouse for that)
