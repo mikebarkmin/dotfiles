@@ -15,10 +15,12 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'lambdalisue/suda.vim'
 Plug 'sjl/gundo.vim'
+Plug 'sheerun/vim-polyglot'
 
 " Themes
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'
+Plug 'joshdick/onedark.vim'
 
 " Autocompletion and Snippets
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -223,7 +225,7 @@ set list
 set laststatus=2
 set colorcolumn=80
 
-colorscheme gruvbox
+colorscheme onedark
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark="soft"
 set background=dark
