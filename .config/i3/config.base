@@ -354,4 +354,4 @@ client.urgent           $base08 $base08 $base00 $base08 $base08
 client.placeholder      $base00 $base00 $base05 $base00 $base00
 client.background $base07
 
-exec_always --no-startup-id hsetroot -solid "$base05"
+exec_always --no-startup-id hsetroot -solid "$base01"

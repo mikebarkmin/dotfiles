@@ -228,10 +228,10 @@ let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark="soft"
 set background=dark
 
-" if filereadable(expand("~/.vimrc_background"))
-"   let base16colorspace=256
-"   source ~/.vimrc_background
-" endif
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 
 " }}}
