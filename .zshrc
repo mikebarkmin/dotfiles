@@ -120,6 +120,7 @@ alias ipe='curl ipinfo.io/ip'
 alias dps='docker ps'
 alias dstop='docker stop $(docker ps -aq)'
 alias dkill='docker rm $(docker stop $(docker ps -aq))'
+alias ddelete='docker rm $(docker ps -a -q) && docker rmi $(docker images -q)'
 
 export BASE16_SHELL_HOOKS=$HOME/.config/base16-shell/hooks
 
