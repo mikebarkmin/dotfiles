@@ -122,6 +122,11 @@ alias dstop='docker stop $(docker ps -aq)'
 alias dkill='docker rm $(docker stop $(docker ps -aq))'
 alias ddelete='docker rm $(docker ps -a -q) && docker rmi $(docker images -q)'
 
+# Gnome
+# Keybindings
+alias keydump='dconf dump /org/gnome/desktop/wm/keybindings/ > keybindings.dconf'
+alias keyload='dconf load /org/gnome/desktop/wm/keybindings/ < keybindings.dconf'
+
 export BASE16_SHELL_HOOKS=$HOME/.config/base16-shell/hooks
 
 # virtualenvwrapper
