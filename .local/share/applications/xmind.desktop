@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=Create and share mind maps
+Exec=/opt/xmind/XMind_amd64/XMind %F
+Path=/opt/xmind/XMind_amd64
+Name=XMind
+Terminal=false
+Type=Application
+Icon=xmind
