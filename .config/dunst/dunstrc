@@ -207,20 +207,20 @@
     # is connected or disconnected which might break follow mode if the screen
     # layout changes.
     force_xinerama = false
-frame_color = "#abb2bf"
-separator_color = "#abb2bf"
+frame_color = "#e9e9f4"
+separator_color = "#e9e9f4"
 
 [base16_low]
     msg_urgency = low
-    background = "#353b45"
-    foreground = "#545862"
+    background = "#3a3c4e"
+    foreground = "#4d4f68"
 
 [base16_normal]
     msg_urgency = normal
-    background = "#3e4451"
-    foreground = "#abb2bf"
+    background = "#626483"
+    foreground = "#e9e9f4"
 
 [base16_critical]
     msg_urgency = critical
-    background = "#e06c75"
-    foreground = "#b6bdca"
+    background = "#ea51b2"
+    foreground = "#f1f2f8"

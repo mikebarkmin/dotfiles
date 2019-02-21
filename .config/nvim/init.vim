@@ -18,9 +18,10 @@ Plug 'sjl/gundo.vim'
 Plug 'sheerun/vim-polyglot'
 
 " Themes
-Plug 'morhetz/gruvbox'
-Plug 'chriskempson/base16-vim'
-Plug 'joshdick/onedark.vim'
+" Plug 'morhetz/gruvbox'
+" Plug 'chriskempson/base16-vim'
+" Plug 'joshdick/onedark.vim'
+Plug 'dracula/vim', {'as': 'dracula'}
 
 " Autocompletion and Snippets
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -224,16 +225,17 @@ set number relativenumber
 set list
 set laststatus=2
 set colorcolumn=80
+let g:dracula_colorterm = 0
 
-colorscheme onedark
-let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark="soft"
-set background=dark
+color dracula
+" let g:gruvbox_italic=1
+" let g:gruvbox_contrast_dark="soft"
+" set background=dark
 
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+" if filereadable(expand("~/.vimrc_background"))
+"   let base16colorspace=256
+"   source ~/.vimrc_background
+" endif
 
 
 " }}}
