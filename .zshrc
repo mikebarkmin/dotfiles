@@ -2,7 +2,7 @@
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/mbarkmin/.oh-my-zsh
+export ZSH=/home/mbarkmin/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -124,10 +124,11 @@ alias ddelete='docker rm $(docker ps -a -q) && docker rmi $(docker images -q)'
 
 # Gnome
 # Keybindings
-alias keydump='dconf dump /org/gnome/desktop/wm/keybindings/ > keybindings.dconf'
-alias keyload='dconf load /org/gnome/desktop/wm/keybindings/ < keybindings.dconf'
+alias keydump='dconf dump /org/gnome/desktop/wm/keybindings/ > ~/.config/keybindings.dconf'
+alias keyload='dconf load /org/gnome/desktop/wm/keybindings/ < ~/.config/keybindings.dconf'
 
 export BASE16_SHELL_HOOKS=$HOME/.config/base16-shell/hooks
+export BIBINPUTS=$HOME/Sciebo/Zotero.bib
 
 # virtualenvwrapper
 export WORKON_HOME=~/.virtualenv

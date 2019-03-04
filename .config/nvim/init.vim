@@ -320,10 +320,10 @@ let g:ale_set_quickfix = 1
 let g:ale_javascript_tsserver_use_global = 1
 set completeopt=menu,menuone,preview,noselect,noinsert
 hi ALEErrorSign ctermfg=Red
-hi ALEError ctermbg=Red ctermfg=Black
+hi ALEError ctermbg=Black ctermfg=Red
 hi ALEWarning ctermbg=Yellow ctermfg=Black
 hi ALEInfo ctermbg=Cyan ctermfg=Black
-hi ALEErrorLine ctermbg=Red ctermfg=Black
+" hi ALEErrorLine ctermbg=Black ctermfg=Red
 
 nnoremap <silent> gi :ALEHover<CR>
 nnoremap <silent> gd :ALEGoToDefinition<CR>
@@ -362,7 +362,7 @@ endif
 " }}}
 " Vimtex {{{
 
-let g:vimtex_compiler_progname = 'nvr'
+" let g:vimtex_compiler_progname = 'nvr'
 let g:tex_conceal = ''
 au BufRead,BufNewFile *.tex let &l:flp = '^\s*\\\(end\|item\)\>'
 let g:vimtex_compiler_latexmk = {
