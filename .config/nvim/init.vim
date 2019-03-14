@@ -16,6 +16,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'lambdalisue/suda.vim'
 Plug 'sjl/gundo.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/goyo.vim'
 
 " Themes
 " Plug 'morhetz/gruvbox'
@@ -56,7 +57,7 @@ Plug 'leshill/vim-json'
 " Spellchecking
 Plug 'rhysd/vim-grammarous'
 Plug 'dbmrq/vim-ditto'
-Plug 'reedes/vim-wordy'
+" Plug 'reedes/vim-wordy'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -74,11 +75,13 @@ let g:maplocalleader=','
 nnoremap <leader>th :set hlsearch!<CR>
 nnoremap <leader>tf :NERDTreeToggle<CR>
 nnoremap <leader>tu :GundoToggle<CR>
+nnoremap <leader>tg :Goyo<CR>
 nnoremap <leader>fb :Denite buffer<CR>
 nnoremap <leader>fo :Denite outline<CR>
 nnoremap <leader>ff :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
 nnoremap <leader>fg :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
 nnoremap <leader>fa :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
+nnoremap <leader>fs :Denite grammarous
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
 " force write with sude
 " cnoremap w!! w !sudo tee "%" > /dev/null
