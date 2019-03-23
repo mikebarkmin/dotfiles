@@ -264,6 +264,7 @@ mode "$mode_audio" {
 
 assign [class="^Zotero$"] $w6
 assign [class="^Thunderbird$"] $w7
+assign [class="^Evolution$"] $w7
 assign [class="^Spotify$"] $w8
 for_window [class="Spotify"] move to workspace $w8
 # for_window [class="^bluej.*$"] floating enable floating enable
@@ -285,7 +286,8 @@ exec urxvt -name urxvt_scratchpad
 # autostart application
 exec compton &
 exec zotero &
-exec thunderbird &
+#exec thunderbird &
+exec evolution &
 exec nextcloud &
 exec redshift-gtk &
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon &
