@@ -393,6 +393,7 @@ let g:ale_javascript_prettier_options = '--single-quote'
 " let g:vimtex_compiler_progname = 'nvr'
 let g:tex_conceal = ''
 au BufRead,BufNewFile *.tex let &l:flp = '^\s*\\\(end\|item\)\>'
+let g:vimtex_compiler_progname = 'nvr'
 let g:vimtex_compiler_latexmk = {
         \ 'backend' : 'nvim',
         \ 'background' : 1,
