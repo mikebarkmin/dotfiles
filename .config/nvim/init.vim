@@ -356,7 +356,7 @@ call denite#custom#var('grep', 'final_opts', [])
 " Ale {{{
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_lint_on_enter = 1 " Less distracting when opening a new file
 let g:ale_set_highlights = 1
 let g:ale_fix_on_save = 1
