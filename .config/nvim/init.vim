@@ -2,21 +2,31 @@
 " ----
 call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-vimtex', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
+
+Plug 'honza/vim-snippets'
+
 Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdtree'
-Plug 'w0rp/ale'
 Plug 'Shougo/denite.nvim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-" Vim plugin, provides insert mode auto-completion for quotes, parens, brackets, etc.
-Plug 'Raimondi/delimitMate'
 " This plugin highlights patterns and ranges for Ex commands in Command-line mode.
 Plug 'markonm/traces.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'lambdalisue/suda.vim'
 Plug 'sjl/gundo.vim'
-" Highlighting for many languages
-Plug 'sheerun/vim-polyglot'
 
 " Themes
 Plug 'dracula/vim', {'as': 'dracula'}
@@ -27,22 +37,12 @@ Plug 'dracula/vim', {'as': 'dracula'}
 " R
 Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
 
-" Pandoc
-Plug 'vim-pandoc/vim-pandoc', { 'for': 'markdown' }
-Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
-
 " Latex
 Plug 'lervag/vimtex'
 Plug 'mhinz/neovim-remote'
 
 " Javascript
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-
-" Markdown
-Plug 'shime/vim-livedown'
-
-" JSON
-Plug 'leshill/vim-json'
+Plug 'neoclide/vim-jsx-improve'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -253,11 +253,18 @@ endfunction
 
 " Plugins {{{
 " -------
+" coc {{{
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+set statusline^=%{coc#status()}
+
+" use <c-space>for trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
+noremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" }}}
 " suda {{{
 let g:suda_smart_edit = 1
-" }}}
-" vim-jsx {{{
-let g:jsx_ext_required = 0
 " }}}
 " Denite {{{
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
@@ -281,45 +288,14 @@ call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
 " }}}
-" Ale {{{
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-let g:ale_completion_enabled = 0
-let g:ale_lint_on_enter = 1 " Less distracting when opening a new file
-let g:ale_set_highlights = 1
-let g:ale_fix_on_save = 1
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-let g:ale_javascript_tsserver_use_global = 1
-set completeopt=menu,menuone,preview,noselect,noinsert
-hi ALEErrorSign ctermfg=Red
-hi ALEError ctermbg=Black ctermfg=Red
-hi ALEWarning ctermbg=Yellow ctermfg=Black
-hi ALEInfo ctermbg=Cyan ctermfg=Black
-" hi ALEErrorLine ctermbg=Black ctermfg=Red
-
-nnoremap <silent> gi :ALEHover<CR>
-nnoremap <silent> gd :ALEGoToDefinition<CR>
-nnoremap <silent> gr :ALEFindReferences<CR>
-
-let g:ale_fixers = {
-\   'javascript': ['prettier', 'eslint'],
-\   'python': ['autopep8', 'isort', 'yapf'],
-\   '*': ['trim_whitespace']
-\}
-
-let g:ale_linters = {
-\   'javascript': ['tsserver', 'eslint'],
-\   'python': ['flake8', 'pyls']
-\}
-
-let g:ale_javascript_prettier_options = '--single-quote'
-
-" }}}
 " Vimtex {{{
 
-let g:polyglot_disabled = ['latex']
 let g:vimtex_compiler_progname = 'nvr'
+let g:vimtex_complete_enabled = 1
+let g:vimtex_complete_bib = {
+      \ 'simple': 1,
+      \ 'recursive': 1,
+      \}
 let g:vimtex_compiler_latexmk = {
         \ 'background' : 1,
         \ 'build_dir' : 'build',

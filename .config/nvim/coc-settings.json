@@ -1,0 +1,8 @@
+{
+  "prettier.singleQuote": true,
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "json", "css", "python"],
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.venvPath": "~/.virtualenv",
+  "coc.source.file.ignoreHidden": false
+}
