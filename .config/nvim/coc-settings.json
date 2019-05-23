@@ -4,5 +4,8 @@
   "python.linting.enabled": true,
   "python.linting.flake8Enabled": true,
   "python.venvPath": "~/.virtualenv",
-  "coc.source.file.ignoreHidden": false
+  "coc.source.file.ignoreHidden": false,
+  "diagnostic.errorSign": "•",
+  "diagnostic.warningSign": "•",
+  "diagnostic.infoSign": "•"
 }

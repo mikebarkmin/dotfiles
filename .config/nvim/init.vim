@@ -17,7 +17,6 @@ Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
 
 Plug 'honza/vim-snippets'
 
-Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/denite.nvim'
 Plug 'tpope/vim-surround'
@@ -60,7 +59,6 @@ let g:maplocalleader=','
 nnoremap <leader>th :set hlsearch!<CR>
 nnoremap <leader>tf :NERDTreeToggle<CR>
 nnoremap <leader>tu :GundoToggle<CR>
-nnoremap <leader>tg :Goyo<CR>
 nnoremap <leader>fb :Denite buffer<CR>
 nnoremap <leader>fo :Denite outline<CR>
 nnoremap <leader>ff :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
@@ -185,7 +183,8 @@ set smartindent
 set shiftround
 set expandtab
 
-" }}} Searching {{{
+" }}}
+" Searching {{{
 " ---------
 set ignorecase
 set smartcase
@@ -208,8 +207,6 @@ set signcolumn=yes
 let g:dracula_colorterm = 0
 set background=dark
 color dracula
-" let g:gruvbox_italic=1
-" let g:gruvbox_contrast_dark="soft"
 
 " if filereadable(expand("~/.vimrc_background"))
 "   let base16colorspace=256
@@ -259,7 +256,7 @@ set statusline^=%{coc#status()}
 
 " use <c-space>for trigger completion
 inoremap <silent><expr> <c-space> coc#refresh()
-noremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " }}}
