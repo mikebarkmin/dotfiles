@@ -6,26 +6,23 @@ Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
 Plug 'Shougo/denite.nvim'
-Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+" Vim plugin, provides insert mode auto-completion for quotes, parens, brackets, etc.
 Plug 'Raimondi/delimitMate'
+" This plugin highlights patterns and ranges for Ex commands in Command-line mode.
 Plug 'markonm/traces.vim'
-Plug 'kien/rainbow_parentheses.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'lambdalisue/suda.vim'
 Plug 'sjl/gundo.vim'
+" Highlighting for many languages
 Plug 'sheerun/vim-polyglot'
-Plug 'junegunn/goyo.vim'
 
 " Themes
-" Plug 'morhetz/gruvbox'
-" Plug 'chriskempson/base16-vim'
-" Plug 'joshdick/onedark.vim'
 Plug 'dracula/vim', {'as': 'dracula'}
 
 " Autocompletion and Snippets
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
 " R
 Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
@@ -38,26 +35,14 @@ Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'markdown' }
 Plug 'lervag/vimtex'
 Plug 'mhinz/neovim-remote'
 
-" Python
-Plug 'tmhedberg/SimpylFold'
-
 " Javascript
-Plug 'mklabs/mdn.vim'
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'moll/vim-node'
-
 
 " Markdown
 Plug 'shime/vim-livedown'
 
 " JSON
 Plug 'leshill/vim-json'
-
-" Spellchecking
-Plug 'rhysd/vim-grammarous'
-Plug 'dbmrq/vim-ditto'
-" Plug 'reedes/vim-wordy'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -81,7 +66,6 @@ nnoremap <leader>fo :Denite outline<CR>
 nnoremap <leader>ff :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
 nnoremap <leader>fg :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
 nnoremap <leader>fa :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
-nnoremap <leader>fs :Denite grammarous
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
 " force write with sude
 " cnoremap w!! w !sudo tee "%" > /dev/null
@@ -189,10 +173,6 @@ let g:sudo_askpass='/usr/lib/openssh/gnome-ssh-askpass'
 set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 
 " }}}
-" Vim Directories {{{
-" ---------------
-
-" }}}
 " Tabs and Indents {{{
 " ----------------
 set textwidth=0
@@ -275,59 +255,6 @@ endfunction
 
 " Plugins {{{
 " -------
-" coc {{{
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> for trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use `[c` and `]c` for navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-"Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-hi CocHighlightText ctermfg=Cyan
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-" }}}
 " vim-jsx {{{
 let g:jsx_ext_required = 0
 " }}}
@@ -390,24 +317,14 @@ let g:ale_javascript_prettier_options = '--single-quote'
 " }}}
 " Vimtex {{{
 
-" let g:vimtex_compiler_progname = 'nvr'
-let g:tex_conceal = ''
-au BufRead,BufNewFile *.tex let &l:flp = '^\s*\\\(end\|item\)\>'
+let g:polyglot_disabled = ['latex']
 let g:vimtex_compiler_progname = 'nvr'
 let g:vimtex_compiler_latexmk = {
-        \ 'backend' : 'nvim',
         \ 'background' : 1,
         \ 'build_dir' : 'build',
         \ 'callback' : 1,
         \ 'continuous' : 1,
-        \ 'executable' : 'latexmk',
-        \ 'options' : [
-        \   '-verbose',
-        \   '-file-line-error',
-        \   '-synctex=1',
-        \   '-interaction=nonstopmode',
-        \   '--shell-escape',
-        \ ],
+        \ 'executable' : 'latexmk'
         \}
 
 " }}}
@@ -415,17 +332,6 @@ let g:vimtex_compiler_latexmk = {
 command Gbranch :Twiggy
 
 " }}}
-" fugitive-gitlab {{{
-" }}}
-" }}}
-
-" FileType Settings {{{
-function! MyFormatExpr(start, end)
-    silent execute a:start.','.a:end.'s/\(\<vgl\|e\.g\|\<al\)\@<![.!?]\zs /\r/g'
-endfunction
-
-autocmd FileType tex set formatexpr=MyFormatExpr(v:lnum,v:lnum+v:count-1)
 " }}}
 
 " vim: set foldmethod=marker ts=2 sw=2 foldlevel=0 tw=80 :
-"
