@@ -67,9 +67,7 @@ nnoremap <leader>ff :DeniteProjectDir -buffer-name=files -direction=top file_rec
 nnoremap <leader>fg :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
 nnoremap <leader>fa :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
-" force write with sude
-" cnoremap w!! w !sudo tee "%" > /dev/null
-cnoremap w!! w suda://%
+
 function ToggleWrap()
   if &wrap
     echo "Wrap OFF"
@@ -255,6 +253,9 @@ endfunction
 
 " Plugins {{{
 " -------
+" suda {{{
+let g:suda_smart_edit = 1
+" }}}
 " vim-jsx {{{
 let g:jsx_ext_required = 0
 " }}}
