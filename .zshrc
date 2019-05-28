@@ -109,6 +109,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias uc="uncommitted ~/Sources"
 alias vim=nvim
 alias com="cd ~/Sources/commoop"
 alias s="cd ~/Sources"

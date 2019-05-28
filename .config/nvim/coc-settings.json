@@ -7,5 +7,6 @@
   "coc.source.file.ignoreHidden": false,
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
-  "diagnostic.infoSign": "•"
+  "diagnostic.infoSign": "•",
+  "eslint.packageManager": "yarn"
 }

@@ -192,3 +192,14 @@ render() {
 	);}
 }
 endsnippet
+
+snippet sb "Storybook Stories"
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+
+import $1 from '../src/$1';
+
+storiesOf('$1', module).add('normal', () => (
+  <$1 />
+));
+endsnippet
