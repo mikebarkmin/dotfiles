@@ -22,6 +22,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Shougo/denite.nvim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'Yggdroot/indentLine'
 " This plugin highlights patterns and ranges for Ex commands in Command-line mode.
 Plug 'markonm/traces.vim'
 Plug 'terryma/vim-multiple-cursors'
@@ -251,6 +252,9 @@ endfunction
 
 " Plugins {{{
 " -------
+" indentLine {{{
+let g:indentLine_setColors = 0
+" }}}
 " coc {{{
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 set statusline^=%{coc#status()}
