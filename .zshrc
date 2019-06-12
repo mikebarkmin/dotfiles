@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:/usr/local/bin:$PATH:$HOME/Sources/go/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/mbarkmin/.oh-my-zsh
@@ -130,6 +130,9 @@ alias keyload='dconf load /org/gnome/desktop/wm/keybindings/ < ~/.config/keybind
 
 export BASE16_SHELL_HOOKS=$HOME/.config/base16-shell/hooks
 export BIBINPUTS=$HOME/Sciebo/Zotero.bib
+
+# GO
+export GOPATH=~/Sources/go
 
 # virtualenvwrapper
 export WORKON_HOME=~/.virtualenv
