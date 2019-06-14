@@ -20,8 +20,9 @@ Plug 'fatih/vim-go',  {'do': ':GoUpdateBinaries' }
 
 Plug 'honza/vim-snippets'
 
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'Shougo/denite.nvim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'Yggdroot/indentLine'
@@ -63,11 +64,12 @@ let g:maplocalleader=','
 nnoremap <leader>th :set hlsearch!<CR>
 nnoremap <leader>tf :NERDTreeToggle<CR>
 nnoremap <leader>tu :GundoToggle<CR>
-nnoremap <leader>fb :Denite buffer<CR>
-nnoremap <leader>fo :Denite outline<CR>
-nnoremap <leader>ff :DeniteProjectDir -buffer-name=files -direction=top file_rec<CR>
-nnoremap <leader>fg :DeniteProjectDir -buffer-name=git -direction=top file_rec/git<CR>
-nnoremap <leader>fa :DeniteProjectDir -buffer-name=grep -default-action=quickfix grep:::!<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>ft :Tags<CR>
+nnoremap <leader>fc :Commits<CR>
+nnoremap <leader>fg :GFiles<CR>
+nnoremap <leader>fm :Marks<CR>
+nnoremap <leader>fa :Ag<CR>
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
 
 function ToggleWrap()
@@ -269,28 +271,6 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " }}}
 " suda {{{
 let g:suda_smart_edit = 1
-" }}}
-" Denite {{{
-call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
-" -u flag to unrestrict (see ag docs)
-call denite#custom#var('file_rec', 'command',
-\ ['ag', '--follow', '--nocolor', '--nogroup', '-u', '-g', ''])
-
-call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-call denite#custom#var('file_rec/git', 'command',
-      \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-call denite#custom#source(
-\ 'grep', 'matchers', ['matcher_regexp'])
-
-" use ag for content search
-call denite#custom#var('grep', 'command', ['ag'])
-call denite#custom#var('grep', 'default_opts',
-    \ ['-i', '--vimgrep'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', [])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
 " }}}
 " Vimtex {{{
 

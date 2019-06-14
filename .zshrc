@@ -138,3 +138,5 @@ export GOPATH=~/Sources/go
 export WORKON_HOME=~/.virtualenv
 mkdir -p $WORKON_HOME
 source /usr/local/bin/virtualenvwrapper.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
