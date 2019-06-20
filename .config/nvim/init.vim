@@ -257,7 +257,7 @@ endfunction
 " Plugins {{{
 " -------
 " indentLine {{{
-let g:indentLine_setColors = 0
+" let g:indentLine_setColors = 0
 " }}}
 " coc {{{
 command! -nargs=0 Prettier :CocCommand prettier.formatFile

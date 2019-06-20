@@ -23,6 +23,66 @@
 #		endsnippet
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+snippet mrfc "MUI React Function Component" b
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles'
+import PropTypes from 'prop-types';
+
+const useStyles = makeStyles(theme => ({}))
+
+function ${1:`!v expand('%:t:r')`}() {
+	const classes = useStyles();
+
+	return <${3:div}>$0</$3>;
+}
+
+$1.propTypes = {}
+
+export default $1;
+endsnippet
+
+snippet rfc "React Function Component" b
+import React from 'react';
+import PropTypes from 'prop-types';
+
+function ${1:`!v expand('%:t:r')`}() {
+	return <${3:div}>$0</$3>;
+}
+
+$1.propTypes = {}
+
+export default $1;
+endsnippet
+
+snippet mrcc "MUI React Class Component" b
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({});
+
+class ${1:`!v expand('%:t:r')`} extends Component {
+	static propTypes = {
+		${2:children: PropTypes.node,
+		className: PropTypes.string,}
+		classes: PropTypes.object.isRequired
+	};
+
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+			<${3:div}>
+				$0
+			</$3>
+		);
+	}
+}
+
+export default $1;
+endsnippet
 
 snippet rcc "React Class Component" b
 import React, { Component } from 'react';

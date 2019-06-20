@@ -111,9 +111,10 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias uc="uncommitted ~/Sources"
 alias vim=nvim
+alias senv="set -a; source .env; set +a"
 alias com="cd ~/Sources/commoop"
 alias s="cd ~/Sources"
-alias www='python -m SimpleHTTPServer 8000'
+alias www='live-server'
 alias ping='ping -c 5'
 alias ipe='curl ipinfo.io/ip'
 
