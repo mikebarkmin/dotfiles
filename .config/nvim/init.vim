@@ -68,6 +68,7 @@ nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>fg :GFiles<CR>
+nnoremap <leader>ff :GFiles<CR>
 nnoremap <leader>fm :Marks<CR>
 nnoremap <leader>fa :Ag<CR>
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
@@ -209,6 +210,7 @@ set cmdheight=2
 set updatetime=300
 set shortmess+=c
 set signcolumn=yes
+set conceallevel=0
 
 let g:dracula_colorterm = 0
 set background=dark
