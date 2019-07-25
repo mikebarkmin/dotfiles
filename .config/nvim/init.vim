@@ -68,12 +68,14 @@ nnoremap <leader>fb :Buffers<CR>
 nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>fg :GFiles<CR>
-nnoremap <leader>ff :GFiles<CR>
+nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fm :Marks<CR>
 nnoremap <leader>fa :Ag<CR>
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
+nnoremap <leader>ev :vsp ~/.config/nvim/init.vim<CR>
+nnoremap <leader>sv :source ~/.config/nvim/init.vim <bar> :doautocmd BufRead<CR>
 
-function ToggleWrap()
+function! ToggleWrap()
   if &wrap
     echo "Wrap OFF"
     setlocal nowrap
@@ -165,7 +167,7 @@ nmap <silent> <F7> :call ToggleSpell()<CR>
 " autocd to current dir of file
 set autochdir
 
-function PrintFile(fname)
+function! PrintFile(fname)
    call system("gtklp " . a:fname)
    call delete(a:fname)
    return v:shell_error
@@ -292,7 +294,7 @@ let g:vimtex_compiler_latexmk = {
 
 " }}}
 " Twiggy {{{
-command Gbranch :Twiggy
+command! Gbranch :Twiggy
 
 " }}}
 " }}}

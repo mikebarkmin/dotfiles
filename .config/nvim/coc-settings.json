@@ -8,5 +8,6 @@
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
-  "eslint.packageManager": "yarn"
+  "eslint.packageManager": "yarn",
+  "java.errors.incompleteClasspath.severity": "ignore"
 }
