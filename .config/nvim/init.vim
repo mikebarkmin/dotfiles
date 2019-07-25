@@ -17,6 +17,7 @@ Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
 Plug 'fatih/vim-go',  {'do': ':GoUpdateBinaries' }
+Plug 'hashivim/vim-terraform'
 
 Plug 'honza/vim-snippets'
 
@@ -212,7 +213,6 @@ set cmdheight=2
 set updatetime=300
 set shortmess+=c
 set signcolumn=yes
-set conceallevel=0
 
 let g:dracula_colorterm = 0
 set background=dark
@@ -260,6 +260,10 @@ endfunction
 
 " Plugins {{{
 " -------
+" terraform {{{
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+" }}}
 " indentLine {{{
 " let g:indentLine_setColors = 0
 " }}}
