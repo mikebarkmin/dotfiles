@@ -49,6 +49,9 @@ Plug 'mhinz/neovim-remote'
 " Javascript
 Plug 'neoclide/vim-jsx-improve'
 
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
@@ -300,6 +303,9 @@ let g:vimtex_compiler_latexmk = {
 " Twiggy {{{
 command! Gbranch :Twiggy
 
+" }}}
+" Markdown {{{
+let g:mkdp_auto_start=1
 " }}}
 " }}}
 
