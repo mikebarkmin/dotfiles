@@ -263,15 +263,22 @@ mode "$mode_audio" {
 }
 
 assign [class="^Zotero$"] $w6
+
+# workspace
+workspace_layout tabbed
 assign [class="^Thunderbird$"] $w7
 assign [class="^Evolution$"] $w7
+assign [class="^Slack$"] $w7
+assign [class="^TelegramDesktopk$"] $w7
+#exec thunderbird &
+exec evolution &
+exec slack &
+exec telegram-desktop &
+workspace_layout default
+
 assign [class="^Spotify$"] $w8
 for_window [class="Spotify"] move to workspace $w8
-# for_window [class="^bluej.*$"] floating enable floating enable
-
-# no caps lock
-exec_always setxkbmap -layout de -model pc105 -option caps:escape
-exec_always dunst
+exec spotify
 
 # floating windows
 for_window [window_role="^toolbox_window$"] floating enable
@@ -284,15 +291,16 @@ for_window [instance="urxvt_scratchpad"] move scratchpad
 exec urxvt -name urxvt_scratchpad
 
 # autostart application
+# no caps lock
+exec_always setxkbmap -layout de -model pc105 -option caps:escape
+exec_always dunst
 exec compton &
 exec zotero &
-#exec thunderbird &
-exec evolution &
 exec nextcloud &
-exec redshift-gtk &
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon &
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id i3battery -n &
+exec redshift-gtk &
 exec nm-applet &
 exec blueman-applet &
 
