@@ -263,22 +263,12 @@ mode "$mode_audio" {
 }
 
 assign [class="^Zotero$"] $w6
-
-# workspace
-workspace_layout tabbed
 assign [class="^Thunderbird$"] $w7
 assign [class="^Evolution$"] $w7
 assign [class="^Slack$"] $w7
-assign [class="^TelegramDesktopk$"] $w7
-#exec thunderbird &
-exec evolution &
-exec slack &
-exec telegram-desktop &
-workspace_layout default
-
+assign [class="^TelegramDesktop$"] $w7
 assign [class="^Spotify$"] $w8
 for_window [class="Spotify"] move to workspace $w8
-exec spotify
 
 # floating windows
 for_window [window_role="^toolbox_window$"] floating enable
@@ -297,6 +287,11 @@ exec_always dunst
 exec compton &
 exec zotero &
 exec nextcloud &
+#exec thunderbird &
+exec evolution &
+exec slack &
+exec spotify
+exec telegram-desktop &
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon &
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id i3battery -n &
