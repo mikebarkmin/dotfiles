@@ -298,6 +298,7 @@ exec --no-startup-id i3battery -n &
 exec redshift-gtk &
 exec nm-applet &
 exec blueman-applet &
+exec kdeconnect-indicator &
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
