@@ -15,6 +15,7 @@ Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'fannheyward/coc-texlab', {'do': 'yarn install --frozen-lockfile'}
 Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
 Plug 'fatih/vim-go',  {'do': ':GoUpdateBinaries' }
 Plug 'hashivim/vim-terraform'
@@ -36,9 +37,6 @@ Plug 'sjl/gundo.vim'
 " Themes
 Plug 'dracula/vim', {'as': 'dracula'}
 
-" Autocompletion and Snippets
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-
 " R
 Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
 
@@ -57,6 +55,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'sodapopcan/vim-twiggy'
 Plug 'airblade/vim-gitgutter'
+
+" Spellchecking
+Plug 'rhysd/vim-grammarous'
 
 call plug#end()
 " }}}
@@ -150,22 +151,21 @@ set undofile
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Spell Check
-let b:myLang=0
-let g:myLangList=["nospell","de_de","en_gb"]
-function! ToggleSpell()
-  let b:myLang=b:myLang+1
-  if b:myLang>=len(g:myLangList) | let b:myLang=0 | endif
-  if b:myLang==0
-    setlocal nospell
-  else
-    execute "setlocal spell spelllang=".get(g:myLangList, b:myLang)
-  endif
-  echo "spell checking language:" g:myLangList[b:myLang]
-endfunction
-
-set complete+=kspell
-
-nmap <silent> <F7> :call ToggleSpell()<CR>
+" let b:myLang=0
+" let g:myLangList=["nospell","de_de","en_gb"]
+" 
+" function! ToggleSpell()
+"   let b:myLang=b:myLang+1
+"   if b:myLang>=len(g:myLangList) | let b:myLang=0 | endif
+"   if b:myLang==0
+"     setlocal nospell
+"   else
+"     execute "setlocal spell spelllang=".get(g:myLangList, b:myLang)
+"   endif
+"   echo "spell checking language:" g:myLangList[b:myLang]
+" endfunction
+" 
+" set complete+=kspell
 
 
 " autocd to current dir of file
@@ -259,6 +259,10 @@ function! FoldText()
   return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
 endfunction
 " }}}
+" Abbreviations {{{
+ab sus Schülerinnen und Schüler
+ab lul Lehrerinnen und Lehrer
+" }}}
 " }}}
 
 " Plugins {{{
@@ -306,6 +310,19 @@ command! Gbranch :Twiggy
 " }}}
 " Markdown {{{
 let g:mkdp_auto_start=0
+" }}}
+" Grammarous {{{
+let g:grammarous#languagetool_cmd = 'languagetool'
+nmap <leader>gp <Plug>(grammarous-move-to-previous-error)
+nmap <leader>gn <Plug>(grammarous-move-to-next-error)
+nmap <leader>gm <Plug>(grammarous-move-to-info-window)
+nmap <leader>go <Plug>(grammarous-open-info-window)
+nmap <leader>gc <Plug>(grammarous-close-info-window)
+nmap <leader>gf <Plug>(grammarous-fixit)
+nmap <leader>gr <Plug>(grammarous-remove-error)
+nmap <silent> <leader>gsd :GrammarousCheck --lang=de<CR>
+nmap <silent> <leader>gse :GrammarousCheck --lang=en<CR>
+nmap <leader>gq <Plug>(grammarous-reset)
 " }}}
 " }}}
 
