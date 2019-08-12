@@ -1,0 +1,3 @@
+#!/bin/bash
+
+java -jar ~/Sciebo/Tools/language-tool/languagetool-commandline.jar --languagemodel ~/Sciebo/Tools/language-tool-ngram "$@"
