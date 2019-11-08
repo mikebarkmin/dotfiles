@@ -75,7 +75,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 if [[ $TILIX_ID ]]; then
-        source /etc/profile.d/vte.sh
+	source /etc/profile.d/vte.sh
 fi
 
 # Base16
@@ -98,6 +98,9 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -c -a emacs"
+export VISUAL="emacsclient -c -a emacs"
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"

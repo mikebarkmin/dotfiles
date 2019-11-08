@@ -71,6 +71,22 @@
 
 (require 'use-package)
 
+(setq evil-want-keybinding nil)
+
+(use-package evil
+  :ensure t
+  :defer t
+  :init (evil-mode 1))
+
+(use-package evil-collection
+  :requires (evil)
+  :ensure t
+  :init (evil-collection-init))
+
+(use-package evil-magit
+  :requires (evil magit)
+  :defer t)
+
 (use-package which-key
   :ensure t
   :diminish which-key-mode
@@ -161,8 +177,15 @@
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
 
 (use-package powerline
+  :ensure t)
+
+(use-package powerline-evil
+  :requires (evil powerline)
   :ensure t
-  :config (powerline-default-theme))
+  :defer t
+  :init
+  (powerline-evil-center-color-theme))
+
 
 (use-package dracula-theme
   :ensure t
@@ -256,7 +279,7 @@
  '(helm-completion-style (quote emacs))
  '(package-selected-packages
    (quote
-    (elisp-format helm-bibtex helm-projectile projectile python-black prettier-js lsp-python-ms lsp-haskell lsp-java company-lsp lsp-ui lsp-mode use-package powerline pdf-tools magit helm flycheck dracula-theme company-auctex beacon autopair))))
+    (powerline-evil evil-collection evil elisp-format helm-bibtex helm-projectile projectile python-black prettier-js lsp-python-ms lsp-haskell lsp-java company-lsp lsp-ui lsp-mode use-package powerline pdf-tools magit helm flycheck dracula-theme company-auctex beacon autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
