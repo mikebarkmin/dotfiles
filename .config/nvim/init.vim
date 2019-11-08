@@ -8,17 +8,16 @@ Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-vimtex', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-Plug 'fannheyward/coc-texlab', {'do': 'yarn install --frozen-lockfile'}
 Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
 Plug 'fatih/vim-go',  {'do': ':GoUpdateBinaries' }
 Plug 'hashivim/vim-terraform'
+Plug 'sheerun/vim-polyglot'
 
 Plug 'honza/vim-snippets'
 
@@ -27,7 +26,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 " This plugin highlights patterns and ranges for Ex commands in Command-line mode.
 Plug 'markonm/traces.vim'
 Plug 'terryma/vim-multiple-cursors'
@@ -216,6 +215,7 @@ set cmdheight=2
 set updatetime=300
 set shortmess+=c
 set signcolumn=yes
+set conceallevel=0
 
 let g:dracula_colorterm = 0
 set background=dark
@@ -283,6 +283,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+autocmd CursorHold * silent call CocActionAsync('highlight')
 " }}}
 " suda {{{
 let g:suda_smart_edit = 1
@@ -324,6 +325,9 @@ nmap <leader>gr <Plug>(grammarous-remove-error)
 nmap <silent> <leader>gsd :GrammarousCheck --lang=de<CR>
 nmap <silent> <leader>gse :GrammarousCheck --lang=en<CR>
 nmap <leader>gq <Plug>(grammarous-reset)
+" }}}
+" polyglot {{{
+let g:polyglot_disabled = ['latex']
 " }}}
 " }}}
 
