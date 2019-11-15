@@ -30,6 +30,7 @@ Plug 'tpope/vim-repeat'
 " This plugin highlights patterns and ranges for Ex commands in Command-line mode.
 Plug 'markonm/traces.vim'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'luochen1990/rainbow'
 Plug 'lambdalisue/suda.vim'
 Plug 'sjl/gundo.vim'
 
@@ -48,6 +49,9 @@ Plug 'neoclide/vim-jsx-improve'
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+
+" Racket
+Plug 'wlangstroth/vim-racket'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -78,6 +82,7 @@ nnoremap <leader>fa :Ag<CR>
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
 nnoremap <leader>ev :vsp ~/.config/nvim/init.vim<CR>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim <bar> :doautocmd BufRead<CR>
+tnoremap <Esc> <C-\><C-n>
 
 function! ToggleWrap()
   if &wrap
@@ -217,6 +222,7 @@ set shortmess+=c
 set signcolumn=yes
 set conceallevel=0
 
+let g:rainbow_active = 1
 let g:dracula_colorterm = 0
 set background=dark
 color dracula
