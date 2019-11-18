@@ -49,6 +49,11 @@ Plug 'neoclide/vim-jsx-improve'
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
+" Clojure
+Plug 'eraserhd/parinfer-rust'
+Plug 'tpope/vim-fireplace'
+
+
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'

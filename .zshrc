@@ -69,6 +69,7 @@ plugins=(
   yarn
   last-working-dir
   colored-man-pages
+  emacs
   httpie
 )
 
@@ -98,10 +99,7 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-export ALTERNATE_EDITOR=""
-export EDITOR="emacsclient -c -a emacs"
-export VISUAL="emacsclient -c -a emacs"
-
+export EMACS="*term*"
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
