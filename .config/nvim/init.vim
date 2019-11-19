@@ -53,6 +53,10 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 " Racket
 Plug 'wlangstroth/vim-racket'
 
+" Clojure
+Plug 'eraserhd/parinfer-rust'
+Plug 'tpope/vim-fireplace'
+
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
