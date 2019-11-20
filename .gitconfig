@@ -4,18 +4,11 @@
 	signingkey = DB03AD0D8AF96072
 [core]
 	excludesfile = ~/.gitignore
-  editor = "vim"
 [commit]
   verbose = true
 	gpgsign = true
 [merge]
   tool = nfugitive
-[mergetool "nfugitive"]
-  cmd = nvim -f -c "Gdiff" "$MERGED"
-[diff]
-  tool = nvimdiff2
-[difftool "nvimdiff2"]
-  cmd = nvim -d $LOCAL $REMOTE
 [init]
 	templatedir = ~/.git_template
 [alias]

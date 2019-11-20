@@ -8,7 +8,11 @@ export TERM=xterm
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="bira"
+if [ -n "$INSIDE_EMACS" ]; then
+    export ZSH_THEME="rawsyntax"
+else
+    export ZSH_THEME="bira"
+fi
 
 # allow tern to load all files
 ulimit -n 2048
@@ -99,7 +103,6 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
-export EMACS="*term*"
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
