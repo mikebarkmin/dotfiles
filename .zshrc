@@ -73,7 +73,6 @@ plugins=(
   yarn
   last-working-dir
   colored-man-pages
-  emacs
   httpie
 )
 
@@ -100,6 +99,7 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 # else
 #   export EDITOR='mvim'
 # fi
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
