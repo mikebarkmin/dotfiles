@@ -14,10 +14,11 @@ Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
-Plug 'fatih/vim-go',  {'do': ':GoUpdateBinaries' }
 Plug 'hashivim/vim-terraform'
 Plug 'sheerun/vim-polyglot'
+Plug 'baverman/vial'
+Plug 'baverman/vial-http'
+Plug 'tpope/vim-abolish'
 
 Plug 'honza/vim-snippets'
 
@@ -82,11 +83,18 @@ nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>fg :GFiles<CR>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fm :Marks<CR>
-nnoremap <leader>fa :Ag<CR>
+" nnoremap <leader>fa :Ag<CR>
 noremap <silent> <Leader>w :call ToggleWrap()<CR>
 nnoremap <leader>ev :vsp ~/.config/nvim/init.vim<CR>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim <bar> :doautocmd BufRead<CR>
 tnoremap <Esc> <C-\><C-n>
+
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+
+nnoremap <leader>fa :GGrep<CR>
 
 function! ToggleWrap()
   if &wrap
@@ -293,6 +301,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Remap for format selected region
+xmap <leader><F2>  <Plug>(coc-format-selected)
+nmap <leader><F2>  <Plug>(coc-format-selected)
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " }}}
 " suda {{{

@@ -71,7 +71,6 @@ plugins=(
   ssh-agent
   docker
   yarn
-  last-working-dir
   colored-man-pages
   httpie
 )
@@ -122,6 +121,7 @@ alias s="cd ~/Sources"
 alias www='live-server'
 alias ping='ping -c 5'
 alias ipe='curl ipinfo.io/ip'
+alias cuid='python -c "import cuid; print(cuid.CuidGenerator().cuid())" | xsel'
 
 # Docker aliases
 alias dps='docker ps'
