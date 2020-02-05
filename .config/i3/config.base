@@ -295,7 +295,7 @@ exec telegram-desktop &
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon &
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id i3battery -n &
-exec redshift-gtk &
+exec redshift-gtk -t 6000:3500 &
 exec nm-applet &
 exec blueman-applet &
 exec kdeconnect-indicator &
