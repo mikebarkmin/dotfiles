@@ -1,4 +1,5 @@
 order += "load"
+order += "memory"
 order += "disk /"
 order += "disk /home"
 order += "wireless wlp2s0"
@@ -40,6 +41,12 @@ volume master {
 	device = "default"
 	mixer = "Master"
 	mixer_idx = 0
+}
+
+memory {
+  format = "%used"
+  threshold_degraded = "10%"
+  format_degraded = "MEMORY: %free"
 }
 
 battery all {
