@@ -150,6 +150,7 @@ set visualbell
 set synmaxcol=1000
 set splitbelow
 set splitright
+set mouse=a
 "
 " autoread and autowrite
 set hidden
