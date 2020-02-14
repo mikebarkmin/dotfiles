@@ -1,0 +1,68 @@
+#!/bin/sh
+
+PATH_OP="~/Sources/openpatch"
+
+DOCKER_SERVICES="authentification-backend assessment-backend comment-backend format-backend itembank-backend recorder-backend mail-backend"
+
+REACT_SERVICES="web-frontend"
+
+usage() {
+cat << EOI
+Usage:
+  op start | stop | rebuild
+
+Options:
+  start     Starts all docker and react services
+  stop      Stops all docker and react services
+  rebuild   Removes all container, pulls new images, cleans node_modules and builds everything new
+EOI
+}
+
+start_op() {
+  for docker_service in ${DOCKER_SERVICES}; do
+    x-terminal-emulator -title $docker_service -e bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull && docker-compose up" &
+  done
+
+  for react_service in ${REACT_SERVICES}; do
+    x-terminal-emulator -title $react_service -e bash -c "cd ${PATH_OP} && cd ${react_service} && git pull && yarn install && yarn dev" &
+  done
+}
+
+stop_op() {
+  for docker_service in ${DOCKER_SERVICES}; do
+    x-terminal-emulator -e bash -c "cd ${PATH_OP} && cd ${docker_service} && docker-compose down"
+  done
+
+ ps ax | grep web-frontend | cut -f1 -d" " - | xargs kill
+
+  for react_service in ${REACT_SERVICES}; do
+    x-terminal-emulator -e bash -c "ps ax | grep cd ${PATH_OP} && cd ${react_service} && git pull && yarn install && yarn dev | cut -fi -d\" \" - | xargs kill"
+  done
+}
+
+rebuild_op() {
+  for docker_service in ${DOCKER_SERVICES}; do
+    x-terminal-emulator -title "$docker_service-rebuild" -e bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull && docker-compose remove && docker-compose pull && docker-compose build" &
+  done
+
+  for react_service in ${REACT_SERVICES}; do
+    x-terminal-emulator -title "$react_service-rebuild" -e bash -c "cd ${PATH_OP} && cd ${react_service} && git pull && rm -rf node_modules && yarn install" &
+  done
+}
+
+case "$1" in
+  start)
+    start_op
+    ;;
+  stop)
+    stop_op
+    ;;
+  rebuild)
+    rebuild_op
+    ;;
+  *)
+    usage
+    ;;
+esac
+
+exit 0
