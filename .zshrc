@@ -68,11 +68,16 @@ COMPLETION_WAITING_DOTS="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  wd
   ssh-agent
   docker
+  docker-compose
+  pip
+  virtualenvwrapper
   yarn
   colored-man-pages
   httpie
+  command-not-found
 )
 
 source $ZSH/oh-my-zsh.sh
