@@ -1,21 +1,36 @@
-#!/bin/sh
+#!/bin/bash
 
 PATH_OP="~/Sources/openpatch"
 
 DOCKER_SERVICES="authentification-backend assessment-backend comment-backend format-backend itembank-backend recorder-backend mail-backend"
+DOCKER_DB_SERVICES="authentification-backend assessment-backend comment-backend itembank-backend recorder-backend"
 
-REACT_SERVICES="web-frontend"
+REACT_SERVICES=("web-frontend")
 
 usage() {
 cat << EOI
 Usage:
-  op init | start | stop | rebuild
+  op init | start | stop | rebuild | pull | db
 
 Options:
-  init      Pulls down all git repositories
+  init      Inits and pulls down all git repositories
+  pull      Pulls down all git repositories
   start     Starts all docker and react services
   stop      Stops all docker and react services
+  db        Manage databases 
   rebuild   Removes all container, pulls new images, cleans node_modules and builds everything new
+EOI
+}
+
+usage_db() {
+cat << EOI
+Usage:
+  op db 
+
+Options:
+  mirror    Mirror remote databse
+  backup    Backup current local databases
+  restore   Restore current local database
 EOI
 }
 
@@ -26,6 +41,16 @@ init_op() {
 
   for react_service in ${REACT_SERVICES}; do
     bash -c "cd ${PATH_OP} && git clone git@gitlab.com:openpatch/${react_service}.git"
+  done
+}
+
+pull_op() {
+  for docker_service in ${DOCKER_SERVICES}; do
+    bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull git@gitlab.com:openpatch/${docker_service}.git"
+  done
+
+  for react_service in ${REACT_SERVICES}; do
+    bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull git@gitlab.com:openpatch/${react_service}.git"
   done
 }
 
@@ -61,6 +86,53 @@ rebuild_op() {
   done
 }
 
+db_mirror_op() {
+  mkdir -p ~/.cache/op/dumps
+  read -p "Enter Database User: " user
+  read -s -p "Enter Database Password: " password
+  echo ""
+  DB_HOST="bm1048291-001.dbaas.ovh.net"
+  DB_PORT="35801"
+  for docker_service in ${DOCKER_DB_SERVICES}; do
+    echo "Mirror ${docker_service}"
+    DB_NAME=$(echo "${docker_service}" | cut -d- -f1)
+    backup_name=$(date +%Y%m%d%H%M%S).sql
+    mkdir -p ~/.cache/op/dumps/${DB_NAME}
+    mysqldump --host=$DB_HOST --port=$DB_PORT -u $user -p$password $DB_NAME > ~/.cache/op/dumps/${DB_NAME}/$backup_name
+
+    bash -c "cd ${PATH_OP} \
+      && cd ${docker_service} \
+      && docker-compose exec database mysql -u $DB_NAME -p$DB_NAME $DB_NAME -e \"DROP DATABASE $DB_NAME; CREATE DATABASE $DB_NAME;\" \
+      && docker exec -i $(docker-compose ps -q database) mysql -u $DB_NAME -p$DB_NAME $DB_NAME < ~/.cache/op/dumps/${DB_NAME}/${backup_name} \
+      && docker-compose restart migration"
+  done
+}
+
+db_backup_op() {
+  echo "currently not implemented"
+}
+
+db_restore_op() {
+  echo "currently not implemented"
+}
+
+
+db_op() {
+  case "$1" in
+    mirror)
+      db_mirror_op
+      ;;
+    backup)
+      db_backup_op
+      ;;
+    restore)
+      db_restore_op
+      ;;
+    *)
+      usage_db
+  esac
+}
+
 case "$1" in
   start)
     start_op
@@ -73,6 +145,12 @@ case "$1" in
     ;;
   init)
     init_op
+    ;;
+  pull)
+    pull_op
+    ;;
+  db)
+    db_op $2
     ;;
   *)
     usage
