@@ -5,7 +5,7 @@ PATH_OP="~/Sources/openpatch"
 DOCKER_SERVICES="authentification-backend assessment-backend comment-backend format-backend itembank-backend recorder-backend mail-backend"
 DOCKER_DB_SERVICES="authentification-backend assessment-backend comment-backend itembank-backend recorder-backend"
 
-REACT_SERVICES=("web-frontend")
+REACT_SERVICES="web-frontend"
 
 usage() {
 cat << EOI
@@ -103,7 +103,7 @@ db_mirror_op() {
     bash -c "cd ${PATH_OP} \
       && cd ${docker_service} \
       && docker-compose exec database mysql -u $DB_NAME -p$DB_NAME $DB_NAME -e \"DROP DATABASE $DB_NAME; CREATE DATABASE $DB_NAME;\" \
-      && docker exec -i $(docker-compose ps -q database) mysql -u $DB_NAME -p$DB_NAME $DB_NAME < ~/.cache/op/dumps/${DB_NAME}/${backup_name} \
+      && docker-compose exec -T database mysql -u $DB_NAME -p$DB_NAME $DB_NAME < ~/.cache/op/dumps/${DB_NAME}/${backup_name} \
       && docker-compose restart migration"
   done
 }
@@ -130,6 +130,7 @@ db_op() {
       ;;
     *)
       usage_db
+      ;;
   esac
 }
 
