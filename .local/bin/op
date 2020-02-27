@@ -4,6 +4,7 @@ PATH_OP="~/Sources/openpatch"
 
 DOCKER_SERVICES="authentification-backend assessment-backend comment-backend format-backend itembank-backend recorder-backend mail-backend"
 DOCKER_DB_SERVICES="authentification-backend assessment-backend comment-backend itembank-backend recorder-backend"
+DOCKER_NETWORKS="openpatch-backend openpatch-runner-net rabbitmq"
 
 REACT_SERVICES="web-frontend"
 
@@ -35,6 +36,10 @@ EOI
 }
 
 init_op() {
+  for docker_network in ${DOCKER_NETWORKS}; do
+    bash -c "docker network create ${docker_network}"
+  done
+
   for docker_service in ${DOCKER_SERVICES}; do
     bash -c "cd ${PATH_OP} && git clone git@gitlab.com:openpatch/${docker_service}.git"
   done
@@ -56,11 +61,11 @@ pull_op() {
 
 start_op() {
   for docker_service in ${DOCKER_SERVICES}; do
-    x-terminal-emulator -title $docker_service -e bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull && docker-compose up" &
+    x-terminal-emulator -title $docker_service -e bash -c "cd ${PATH_OP} && cd ${docker_service} && docker-compose up" &
   done
 
   for react_service in ${REACT_SERVICES}; do
-    x-terminal-emulator -title $react_service -e bash -c "cd ${PATH_OP} && cd ${react_service} && git pull && yarn install && yarn dev" &
+    x-terminal-emulator -title $react_service -e bash -c "cd ${PATH_OP} && cd ${react_service} && yarn install && yarn dev" &
   done
 }
 
@@ -86,13 +91,15 @@ rebuild_op() {
   done
 }
 
+
+DB_HOST="bm1048291-001.dbaas.ovh.net"
+DB_PORT="35801"
+
 db_mirror_op() {
   mkdir -p ~/.cache/op/dumps
   read -p "Enter Database User: " user
   read -s -p "Enter Database Password: " password
   echo ""
-  DB_HOST="bm1048291-001.dbaas.ovh.net"
-  DB_PORT="35801"
   for docker_service in ${DOCKER_DB_SERVICES}; do
     echo "Mirror ${docker_service}"
     DB_NAME=$(echo "${docker_service}" | cut -d- -f1)
@@ -106,6 +113,13 @@ db_mirror_op() {
       && docker-compose exec -T database mysql -u $DB_NAME -p$DB_NAME $DB_NAME < ~/.cache/op/dumps/${DB_NAME}/${backup_name} \
       && docker-compose restart migration"
   done
+}
+
+db_connect() {
+  read -p "Enter Database User: " user
+  read -s -p "Enter Database Password: " password
+  echo ""
+  mysql --host=$DB_HOST --port=$DB_PORT -u $user -p$password $1
 }
 
 db_backup_op() {
@@ -127,6 +141,9 @@ db_op() {
       ;;
     restore)
       db_restore_op
+      ;;
+    connect)
+      db_connect $2
       ;;
     *)
       usage_db
@@ -151,7 +168,7 @@ case "$1" in
     pull_op
     ;;
   db)
-    db_op $2
+    db_op $2 $3
     ;;
   *)
     usage
