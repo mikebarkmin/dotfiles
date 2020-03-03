@@ -2,8 +2,8 @@
 
 PATH_OP="~/Sources/openpatch"
 
-DOCKER_SERVICES="authentification-backend assessment-backend comment-backend format-backend itembank-backend recorder-backend mail-backend"
-DOCKER_DB_SERVICES="authentification-backend assessment-backend comment-backend itembank-backend recorder-backend"
+DOCKER_SERVICES="authentification-backend assessment-backend comment-backend format-backend itembank-backend recorder-backend mail-backend activity-backend media-backend"
+DOCKER_DB_SERVICES="authentification-backend assessment-backend comment-backend itembank-backend recorder-backend activity-backend media-backend"
 DOCKER_NETWORKS="openpatch-backend openpatch-runner-net rabbitmq"
 
 REACT_SERVICES="web-frontend"
@@ -14,8 +14,6 @@ Usage:
   op init | start | stop | rebuild | pull | db
 
 Options:
-  init      Inits and pulls down all git repositories
-  pull      Pulls down all git repositories
   start     Starts all docker and react services
   stop      Stops all docker and react services
   db        Manage databases 
@@ -35,28 +33,16 @@ Options:
 EOI
 }
 
-init_op() {
-  for docker_network in ${DOCKER_NETWORKS}; do
-    bash -c "docker network create ${docker_network}"
-  done
+usage_git() {
+cat << EOI
+Usage:
+  op git
 
-  for docker_service in ${DOCKER_SERVICES}; do
-    bash -c "cd ${PATH_OP} && git clone git@gitlab.com:openpatch/${docker_service}.git"
-  done
-
-  for react_service in ${REACT_SERVICES}; do
-    bash -c "cd ${PATH_OP} && git clone git@gitlab.com:openpatch/${react_service}.git"
-  done
-}
-
-pull_op() {
-  for docker_service in ${DOCKER_SERVICES}; do
-    bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull git@gitlab.com:openpatch/${docker_service}.git"
-  done
-
-  for react_service in ${REACT_SERVICES}; do
-    bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull git@gitlab.com:openpatch/${react_service}.git"
-  done
+Options:
+  init      Inits and pulls down all git repositories
+  pull      Pulls down all git repositories
+  status    Status of all git repositories
+EOI
 }
 
 start_op() {
@@ -101,7 +87,8 @@ db_mirror_op() {
   read -s -p "Enter Database Password: " password
   echo ""
   for docker_service in ${DOCKER_DB_SERVICES}; do
-    echo "Mirror ${docker_service}"
+    echo -e "\e[34mMirror: ${docker_service}"
+    echo -e "\e[0m"
     DB_NAME=$(echo "${docker_service}" | cut -d- -f1)
     backup_name=$(date +%Y%m%d%H%M%S).sql
     mkdir -p ~/.cache/op/dumps/${DB_NAME}
@@ -131,6 +118,62 @@ db_restore_op() {
 }
 
 
+git_init_op() {
+  for docker_network in ${DOCKER_NETWORKS}; do
+    echo ""
+    echo -e "\e[34mInit Network: ${docker_network}"
+    echo -e "\e[0m"
+    bash -c "docker network create ${docker_network}"
+  done
+
+  for docker_service in ${DOCKER_SERVICES}; do
+    echo ""
+    echo -e "\e[34mInit: ${docker_service}"
+    echo -e "\e[0m"
+    bash -c "cd ${PATH_OP} && git clone git@gitlab.com:openpatch/${docker_service}.git"
+  done
+
+  for react_service in ${REACT_SERVICES}; do
+    echo ""
+    echo -e "\e[34mInit: ${react_service}"
+    echo -e "\e[0m"
+    bash -c "cd ${PATH_OP} && git clone git@gitlab.com:openpatch/${react_service}.git"
+  done
+}
+
+git_pull_op() {
+  for docker_service in ${DOCKER_SERVICES}; do
+    echo ""
+    echo -e "\e[34mPull: ${docker_service}"
+    echo -e "\e[0m"
+    bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull git@gitlab.com:openpatch/${docker_service}.git"
+  done
+
+  for react_service in ${REACT_SERVICES}; do
+    echo ""
+    echo -e "\e[34mPull: ${react_service}"
+    echo -e "\e[0m"
+    bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull git@gitlab.com:openpatch/${react_service}.git"
+  done
+}
+
+git_status_op() {
+  for docker_service in ${DOCKER_SERVICES}; do
+    echo ""
+    echo -e "\e[34mStatus: ${docker_service}"
+    echo -e "\e[0m"
+    bash -c "cd ${PATH_OP} && cd ${docker_service} && git status git@gitlab.com:openpatch/${docker_service}.git"
+  done
+
+  for react_service in ${REACT_SERVICES}; do
+    echo ""
+    echo -e "\e[34mStatus: ${react_service}"
+    echo -e "\e[0m"
+    bash -c "cd ${PATH_OP} && cd ${docker_service} && git status git@gitlab.com:openpatch/${react_service}.git"
+  done
+}
+
+
 db_op() {
   case "$1" in
     mirror)
@@ -151,6 +194,23 @@ db_op() {
   esac
 }
 
+git_op() {
+  case "$1" in
+    pull)
+      git_pull_op
+      ;;
+    init)
+      git_init_op
+      ;;
+    status)
+      git_status_op
+      ;;
+    *)
+      usage_git
+      ;;
+  esac
+}
+
 case "$1" in
   start)
     start_op
@@ -161,11 +221,8 @@ case "$1" in
   rebuild)
     rebuild_op
     ;;
-  init)
-    init_op
-    ;;
-  pull)
-    pull_op
+  git)
+    git_op $2
     ;;
   db)
     db_op $2 $3
