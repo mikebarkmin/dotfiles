@@ -1,6 +1,8 @@
 #!/bin/bash
 
 PATH_OP="~/Sources/openpatch"
+DB_HOST="bm1048291-001.dbaas.ovh.net"
+DB_PORT="35801"
 
 DOCKER_SERVICES="authentification-backend assessment-backend comment-backend format-backend itembank-backend recorder-backend mail-backend activity-backend media-backend"
 DOCKER_DB_SERVICES="authentification-backend assessment-backend comment-backend itembank-backend recorder-backend activity-backend media-backend"
@@ -42,6 +44,8 @@ Options:
   init      Inits and pulls down all git repositories
   pull      Pulls down all git repositories
   status    Status of all git repositories
+  changelog Get commits since last tag
+  latest    Get latest tags
 EOI
 }
 
@@ -76,10 +80,6 @@ rebuild_op() {
     x-terminal-emulator -title "$react_service-rebuild" -e bash -c "cd ${PATH_OP} && cd ${react_service} && git pull && rm -rf node_modules && yarn install" &
   done
 }
-
-
-DB_HOST="bm1048291-001.dbaas.ovh.net"
-DB_PORT="35801"
 
 db_mirror_op() {
   mkdir -p ~/.cache/op/dumps
@@ -153,7 +153,7 @@ git_pull_op() {
     echo ""
     echo -e "\e[34mPull: ${react_service}"
     echo -e "\e[0m"
-    bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull git@gitlab.com:openpatch/${react_service}.git"
+    bash -c "cd ${PATH_OP} && cd ${react_service} && git pull git@gitlab.com:openpatch/${react_service}.git"
   done
 }
 
@@ -162,14 +162,46 @@ git_status_op() {
     echo ""
     echo -e "\e[34mStatus: ${docker_service}"
     echo -e "\e[0m"
-    bash -c "cd ${PATH_OP} && cd ${docker_service} && git status git@gitlab.com:openpatch/${docker_service}.git"
+    bash -c "cd ${PATH_OP} && cd ${docker_service} && git status"
   done
 
   for react_service in ${REACT_SERVICES}; do
     echo ""
     echo -e "\e[34mStatus: ${react_service}"
     echo -e "\e[0m"
-    bash -c "cd ${PATH_OP} && cd ${docker_service} && git status git@gitlab.com:openpatch/${react_service}.git"
+    bash -c "cd ${PATH_OP} && cd ${react_service} && git status"
+  done
+}
+
+git_latest() {
+  for docker_service in ${DOCKER_SERVICES}; do
+    echo ""
+    echo -e "\e[34mLatest: ${docker_service}"
+    echo -e "\e[0m"
+    bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull && git describe --tags --abbrev=0"
+  done
+
+  for react_service in ${REACT_SERVICES}; do
+    echo ""
+    echo -e "\e[34mLatest: ${react_service}"
+    echo -e "\e[0m"
+    bash -c "cd ${PATH_OP} && cd ${react_service} && git pull && git describe --tags --abbrev=0"
+  done
+}
+
+git_changelog() {
+  for docker_service in ${DOCKER_SERVICES}; do
+    echo ""
+    echo -e "\e[34mChangelog: ${docker_service}"
+    echo -e "\e[0m"
+    bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull && git --no-pager log \$(git describe --tags --abbrev=0)..HEAD --oneline"
+  done
+
+  for react_service in ${REACT_SERVICES}; do
+    echo ""
+    echo -e "\e[34mChangelog: ${react_service}"
+    echo -e "\e[0m"
+    bash -c "cd ${PATH_OP} && cd ${react_service} && git pull && git --no-pager log \$(git describe --tags --abbrev=0)..HEAD --oneline"
   done
 }
 
@@ -204,6 +236,12 @@ git_op() {
       ;;
     status)
       git_status_op
+      ;;
+    changelog)
+      git_changelog
+      ;;
+    latest)
+      git_latest
       ;;
     *)
       usage_git

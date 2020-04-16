@@ -2,35 +2,26 @@
 " ----
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+" lsp
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 Plug 'hashivim/vim-terraform'
 Plug 'sheerun/vim-polyglot'
-Plug 'baverman/vial'
-Plug 'baverman/vial-http'
+
+" S for replacing case sensitive
 Plug 'tpope/vim-abolish'
 
 Plug 'honza/vim-snippets'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 " Plug 'Yggdroot/indentLine'
 " This plugin highlights patterns and ranges for Ex commands in Command-line mode.
 Plug 'markonm/traces.vim'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'luochen1990/rainbow'
 Plug 'lambdalisue/suda.vim'
 Plug 'sjl/gundo.vim'
@@ -290,9 +281,6 @@ ab lul Lehrerinnen und Lehrer
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 " }}}
-" indentLine {{{
-" let g:indentLine_setColors = 0
-" }}}
 " coc {{{
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 set statusline^=%{coc#status()}
@@ -305,6 +293,9 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Remap for format selected region
 xmap <leader><F2>  <Plug>(coc-format-selected)
 nmap <leader><F2>  <Plug>(coc-format-selected)
+
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " }}}
 " suda {{{
