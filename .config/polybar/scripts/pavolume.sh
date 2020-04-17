@@ -14,7 +14,7 @@ VOLUME_ICONS=( " " " " " " )  # Volume icons array, from lower volume t
 MUTED_ICON=" "  # Muted volume icon
 MUTED_COLOR="%{F#6b6b6b}"  # Color when the audio is muted
 NOTIFICATIONS="no"  # Notifications when switching sinks if enabled
-SINK_ICON=" "  # The default sink icon if a custom one isn't found
+SINK_ICON=""  # The default sink icon if a custom one isn't found
 
 # Blacklist of PulseAudio sink names when switching between them. To obtain
 # the names of your active sinks, use `pactl list sinks short`.
@@ -25,10 +25,11 @@ SINK_BLACKLIST=(
 # Maps PulseAudio sink names to human-readable names
 declare -A SINK_NICKNAMES
 SINK_NICKNAMES["alsa_output.usb-SomeManufacturer_SomeUsbSoundcard-00.analog-stereo"]="External Soundcard"
-SINK_NICKNAMES["alsa_output.pci-0000_0a_00.1.hdmi-stereo"]="HDMI"
-SINK_NICKNAMES["alsa_output.usb-Samson_Technologies_Samson_GoMic-00.analog-stereo"]="GoMic"
-SINK_NICKNAMES["alsa_output.usb-Generic_USB_Audio-00.analog-stereo"]="Dock"
-SINK_NICKNAMES["alsa_output.pci-0000_00_1f.3.analog-stereo"]="Laptop"
+SINK_NICKNAMES["alsa_output.pci-0000_0a_00.1.hdmi-stereo"]=" HDMI"
+SINK_NICKNAMES["alsa_output.usb-Samson_Technologies_Samson_GoMic-00.analog-stereo"]=" GoMic"
+SINK_NICKNAMES["alsa_output.usb-Generic_USB_Audio-00.analog-stereo"]=" Dock"
+SINK_NICKNAMES["alsa_output.pci-0000_00_1f.3.analog-stereo"]=" Laptop"
+SINK_NICKNAMES["bluez_sink.88_D0_39_3D_42_7D.a2dp_sink"]=" REAL Blue"
 
 
 # Environment & global constants for the script

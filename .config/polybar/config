@@ -54,11 +54,11 @@ override-redirect = false
 background          = ${colors.bg}
 foreground          = ${colors.fg}
 
-padding-left        = 0
-padding-right       = 0
-
-module-margin-left  = 0 
-module-margin-right = 0 
+spacing = 0
+padding-left = 2
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 2
 
 font-0 = Iosevka Slab:size=10;3
 font-1 = Material Icons:antialia=false:size=12;5
@@ -66,7 +66,8 @@ font-1 = Material Icons:antialia=false:size=12;5
 tray-position       = center
 tray-padding        = 20
 
-modules-left = blank
+modules-right = battery1 battery2 power-label
+modules-left =  spotify
 
 ;*********************************************************
 ;
@@ -85,17 +86,17 @@ foreground = ${colors.fg}
 
 
 spacing = 0
-padding-left = 0
-padding-right = 0
+padding-left = 2
+padding-right = 2
 module-margin-left = 0
 module-margin-right = 2
 
-font-0 = Iosevka Slab:size=10;3
+font-0 = Iosevka Slab:size=10;2
 font-1 = Material Icons:antialia=false:size=12;4
 
-modules-center = i3
-modules-left = date spotify
-modules-right = volume backlight temperature cpu memory wlan battery1 battery2 power-label
+modules-center = date
+modules-left = i3
+modules-right = isrunning-compton volume backlight temperature cpu memory wlan 
 
 ; tray-position = right
 ; ; tray-maxsize = 10
@@ -257,6 +258,31 @@ format-charging-prefix-foreground = ${colors.blue}
 ramp-capacity-0 = 
 ramp-capacity-1 =  
 ramp-capacity-2 = 
+ramp-capacity-foreground = ${colors.magenta}
+
+label-charging = "%time% (%percentage%%) "
+label-charging-foreground = ${colors.fg}
+
+[module/battery2]
+type = internal/battery
+battery = BAT1
+adapter = ADP1
+full-at = 95
+
+label-discharging = "%time% (%percentage%%) "
+;format-charging = <animation-charging><label-charging>
+format-discharging = <ramp-capacity><label-discharging>
+
+label-full = "full "
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.blue}
+
+format-charging-prefix = 
+format-charging-prefix-foreground = ${colors.blue}
+
+ramp-capacity-0 = 
+ramp-capacity-1 =  
+ramp-capacity-2 = 
 ramp-capacity-foreground = ${colors.cyan}
 
 label-charging = "%time% (%percentage%%) "
@@ -305,6 +331,12 @@ time-alt = %H:%M:%S
 ;format-underline = #0a6cf5
 
 label = "%{F#e5322f}%date% %{F-}%time%"
+
+[module/isrunning-compton]
+type = custom/script
+exec = ~/.config/polybar/scripts/isrunning-compton.sh
+interval = 5
+click-left = ~/.config/polybar/scripts/isrunning-compton.sh --toggle &
 
 [module/power-label]
 type = custom/text

@@ -296,6 +296,7 @@ exec_always --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id compton &
 exec_always --no-startup-id nitrogen --set-zoom-fill /home/mbarkmin/Nextcloud/Bilder/Wallpaper/disco_dingo.png
+exec_always --no-startup-id i3battery -n &
 exec zotero &
 exec nextcloud &
 #exec thunderbird &
