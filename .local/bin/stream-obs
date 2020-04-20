@@ -1,0 +1,96 @@
+#!/bin/bash
+
+if [ "$#" -ne 2 ]; then
+cat << EOI
+stream-obs "source" "sink"
+
+find source with pactl list short sources
+find sink with pactl list short sinks
+EOI
+
+exit 1
+fi
+
+function main() {
+  echo "Settings Gaps on current WS"
+  i3-msg "gaps inner current set 20"
+  i3-msg "gaps outer current set 0"
+  i3-msg "gaps right current set 30"
+  sleep 2
+
+  echo "Restoring Layout on current WS"
+  i3-msg 'append_layout "/home/mbarkmin/.local/bin/stream-obs.layout"'
+  sleep 2
+
+  echo "Launching Application on current WS"
+  alacritty --title "Secondary" &
+  alacritty --title "Main" &
+  alacritty --title "Divider 1" &
+  alacritty --title "Divider 2" &
+  firefox &
+  sleep 2
+
+  if [ ! "$(pgrep -x obs)" ]; then
+    echo "Launching OBS-Studio on WS 2"
+    i3-msg 'workspace 2; exec obs'
+    sleep 3
+  fi
+
+  echo "Changing PulseAudio configuration..."
+  echo "Add sinks"
+  SINK_INPUT_MUSIC_MIC=$(pactl load-module module-null-sink sink_name=input-music-mic sink_properties=device.description=input-music-mic)
+  SINK_OUTPUT_MUSIC=$(pactl load-module module-null-sink sink_name=output-music sink_properties=device.description=output-music)
+
+  MIC_SOURCE=$(get_source_id $1)
+  OUTPUT_SINK=$(get_sink_id $2) 
+
+  if [ -z "$MIC_SOURCE" ]; then
+    echo "Source $1 not found"
+    pactl unload-module $SINK_OUTPUT_MUSIC
+    pactl unload-module $SINK_INPUT_MUSIC_MIC
+    exit 1
+  fi
+
+  if [ -z "$OUTPUT_SINK" ]; then
+    echo "Sink $2 not found"
+    pactl unload-module $SINK_OUTPUT_MUSIC
+    pactl unload-module $SINK_INPUT_MUSIC_MIC
+    exit 1
+  fi
+
+  LB_1=$(pactl load-module module-loopback source=$MIC_SOURCE sink=input-music-mic)
+  LB_2=$(pactl load-module module-loopback source=output-music.monitor sink=input-music-mic)
+  LB_3=$(pactl load-module module-loopback source=output-music.monitor sink=$OUTPUT_SINK)
+  sleep 2 
+
+  echo "Add virtual mic"
+  VIRTUAL_MIC_PAID=$(add_virtual_mic)
+
+  echo "Press Return to shut down..."
+  read -n1 -s -r
+
+  pactl unload-module $VIRTUAL_MIC_PAID
+  pactl unload-module $LB_3
+  pactl unload-module $LB_2
+  pactl unload-module $LB_1
+  pactl unload-module $SINK_OUTPUT_MUSIC
+  pactl unload-module $SINK_INPUT_MUSIC_MIC
+}
+
+function add_virtual_mic() {
+  pactl load-module \
+    module-virtual-source \
+    source_name=virtual-mic \
+    master=input-music-mic.monitor \
+    source_properties=device.description=virtual-mic
+}
+
+function get_source_id() {
+  pactl list short sources | grep $1 | awk '{print $2}'
+}
+
+function get_sink_id() {
+  pactl list short sinks | grep $1 | awk '{print $2}'
+}
+
+main $1 $2

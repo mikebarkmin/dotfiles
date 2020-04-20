@@ -51,11 +51,11 @@ EOI
 
 start_op() {
   for docker_service in ${DOCKER_SERVICES}; do
-    x-terminal-emulator -title $docker_service -e bash -c "cd ${PATH_OP} && cd ${docker_service} && docker-compose up" &
+    x-terminal-emulator --title $docker_service -e bash -c "cd ${PATH_OP} && cd ${docker_service} && docker-compose up" &
   done
 
   for react_service in ${REACT_SERVICES}; do
-    x-terminal-emulator -title $react_service -e bash -c "cd ${PATH_OP} && cd ${react_service} && yarn install && yarn dev" &
+    x-terminal-emulator --title $react_service -e bash -c "cd ${PATH_OP} && cd ${react_service} && yarn install && yarn dev" &
   done
 }
 
@@ -73,11 +73,11 @@ stop_op() {
 
 rebuild_op() {
   for docker_service in ${DOCKER_SERVICES}; do
-    x-terminal-emulator -title "$docker_service-rebuild" -e bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull && docker-compose remove && docker-compose pull && docker-compose build" &
+    x-terminal-emulator --title "$docker_service-rebuild" -e bash -c "cd ${PATH_OP} && cd ${docker_service} && git pull && docker-compose remove && docker-compose pull && docker-compose build" &
   done
 
   for react_service in ${REACT_SERVICES}; do
-    x-terminal-emulator -title "$react_service-rebuild" -e bash -c "cd ${PATH_OP} && cd ${react_service} && git pull && rm -rf node_modules && yarn install" &
+    x-terminal-emulator --title "$react_service-rebuild" -e bash -c "cd ${PATH_OP} && cd ${react_service} && git pull && rm -rf node_modules && yarn install" &
   done
 }
 

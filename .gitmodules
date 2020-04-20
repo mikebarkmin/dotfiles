@@ -19,3 +19,9 @@
 [submodule ".themes/Ant-Dracula"]
 	path = .themes/Ant-Dracula
 	url = https://github.com/EliverLara/Ant-Dracula.git
+[submodule ".config/base16-zathura"]
+	path = .config/base16-zathura
+	url = https://github.com/nicodebo/base16-zathura.git
+[submodule ".config/base16-alacritty"]
+	path = .config/base16-alacritty
+	url = https://github.com/aaron-williamson/base16-alacritty.git

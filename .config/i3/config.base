@@ -160,7 +160,7 @@ bindsym $mod+Shift+0 move container to workspace $w10
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r restart && ~/.config/polybar/launch.sh &
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -294,7 +294,7 @@ exec_always setxkbmap -layout de -model pc105 -option caps:escape
 exec_always dunst
 exec_always --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id compton &
+exec --no-startup-id compton -b &
 exec_always --no-startup-id nitrogen --set-zoom-fill /home/mbarkmin/Nextcloud/Bilder/Wallpaper/disco_dingo.png
 exec_always --no-startup-id i3battery -n &
 exec zotero &

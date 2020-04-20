@@ -165,7 +165,7 @@ label-visible-padding = 4
 ;label-separator = -
 ;label-separator-padding = 1
 
-pin-workspaces = false
+pin-workspaces = true
 
 [module/spotify]
 ;https://github.com/NicholasFeldman/dotfiles/blob/master/polybar/.config/polybar/spotify.sh
