@@ -1,0 +1,1 @@
+{"webpass":"","port":4445,"webport":10314,"pass":"","debug":false,"tout":30,"webopen":false,"sfx":true}
