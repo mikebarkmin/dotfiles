@@ -15,6 +15,8 @@
   "diagnostic.infoSign": "•",
   "eslint.packageManager": "yarn",
   "java.errors.incompleteClasspath.severity": "ignore",
+  "cSpellExt.enableDictionaries": ["german"],
+  "cSpell.language": "en, de",
   "languageserver": {
       "clojure-lsp": {
         "command": "bash",

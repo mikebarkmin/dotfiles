@@ -1,26 +1,23 @@
 [
-  {
-    "name": "commoop-web",
-    "rootPath": "$home/Sources/commoop/commoop-web",
-    "paths": [],
-    "group": "commoop"
-  },
-  {
-    "name": "commoop-api",
-    "rootPath": "$home/Sources/commoop/commoop-api",
-    "paths": [],
-    "group": "commoop"
-  },
-  {
-    "name": "processing-library-scratch",
-    "rootPath": "$home/Sources/processing/processing-library-scratch",
-    "paths": [],
-    "group": "processing"
-  },
-  {
-    "name": "openpatch-itembank",
-    "rootPath": "$home/Sources/openpatch/itembank",
-    "paths": [],
-    "group": "openpatch"
-  }
+	{
+		"name": "web-frontend",
+		"rootPath": "/home/mbarkmin/Sources/openpatch/web-frontend",
+		"paths": [],
+		"group": "",
+		"enabled": true
+	},
+	{
+		"name": "itembank-backend",
+		"rootPath": "/home/mbarkmin/Sources/openpatch/itembank-backend",
+		"paths": [],
+		"group": "",
+		"enabled": true
+	},
+	{
+		"name": "media-backend",
+		"rootPath": "/home/mbarkmin/Sources/openpatch/media-backend",
+		"paths": [],
+		"group": "",
+		"enabled": true
+	}
 ]

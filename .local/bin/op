@@ -49,6 +49,16 @@ Options:
 EOI
 }
 
+usage_tools() {
+cat << EOI
+Usage:
+  op tools
+
+Options:
+  mkvenv    Makes venv and installs basic dependencies
+EOI
+}
+
 start_op() {
   for docker_service in ${DOCKER_SERVICES}; do
     x-terminal-emulator --title $docker_service -e bash -c "cd ${PATH_OP} && cd ${docker_service} && docker-compose up" &
@@ -205,6 +215,19 @@ git_changelog() {
   done
 }
 
+tools_mkvenv() {
+  project_name=${PWD##*/}
+  echo $project_name
+  source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+  mkvirtualenv --python=/usr/bin/python3 $project_name
+  workon $project_name
+  wget https://gitlab.com/openpatch/flask-microservice-base/-/raw/master/requirements.txt -O /tmp/requirements.txt
+  wget https://gitlab.com/openpatch/flask-microservice-base/-/raw/master/requirements.dev.txt -O /tmp/requirements.dev.txt
+  pip install -r /tmp/requirements.txt
+  pip install -r /tmp/requirements.dev.txt
+  pip install -r requirements.txt
+}
+
 
 db_op() {
   case "$1" in
@@ -249,6 +272,17 @@ git_op() {
   esac
 }
 
+tools_op() {
+  case "$1" in
+    mkvenv)
+      tools_mkvenv
+      ;;
+    *)
+      usage_tools
+      ;;
+  esac
+}
+
 case "$1" in
   start)
     start_op
@@ -264,6 +298,9 @@ case "$1" in
     ;;
   db)
     db_op $2 $3
+    ;;
+  tools)
+    tools_op $2
     ;;
   *)
     usage

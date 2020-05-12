@@ -1,4 +1,0 @@
-# assign worksapce to output
-set $monext1 HDMI1
-set $monint eDP1
-

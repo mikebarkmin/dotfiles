@@ -12,17 +12,20 @@ exit 1
 fi
 
 function main() {
-  echo "Settings Gaps on current WS"
+  STREAM_WS=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name' | cut -d"\"" -f2)
+  OBS_WS=$STREAM_WS%10+1
+
+  echo "Settings Gaps on WS $STREAM_WS"
   i3-msg "gaps inner current set 20"
   i3-msg "gaps outer current set 0"
   i3-msg "gaps right current set 30"
   sleep 2
 
-  echo "Restoring Layout on current WS"
+  echo "Restoring Layout on WS $STREAM_WS"
   i3-msg 'append_layout "/home/mbarkmin/.local/bin/stream-obs.layout"'
   sleep 2
 
-  echo "Launching Application on current WS"
+  echo "Launching Application on WS $STREAM_WS"
   alacritty --title "Secondary" &
   alacritty --title "Main" &
   alacritty --title "Divider 1" &
@@ -31,50 +34,61 @@ function main() {
   sleep 2
 
   if [ ! "$(pgrep -x obs)" ]; then
-    echo "Launching OBS-Studio on WS 2"
-    i3-msg 'workspace 2; exec obs'
+    echo "Launching OBS-Studio on WS $OBS_WS"
+    i3-msg "workspace $OBS_WS; exec obs"
     sleep 3
   fi
 
-  echo "Changing PulseAudio configuration..."
-  echo "Add sinks"
-  SINK_INPUT_MUSIC_MIC=$(pactl load-module module-null-sink sink_name=input-music-mic sink_properties=device.description=input-music-mic)
-  SINK_OUTPUT_MUSIC=$(pactl load-module module-null-sink sink_name=output-music sink_properties=device.description=output-music)
-
-  MIC_SOURCE=$(get_source_id $1)
-  OUTPUT_SINK=$(get_sink_id $2) 
-
-  if [ -z "$MIC_SOURCE" ]; then
-    echo "Source $1 not found"
-    pactl unload-module $SINK_OUTPUT_MUSIC
-    pactl unload-module $SINK_INPUT_MUSIC_MIC
-    exit 1
-  fi
-
-  if [ -z "$OUTPUT_SINK" ]; then
-    echo "Sink $2 not found"
-    pactl unload-module $SINK_OUTPUT_MUSIC
-    pactl unload-module $SINK_INPUT_MUSIC_MIC
-    exit 1
-  fi
-
-  LB_1=$(pactl load-module module-loopback source=$MIC_SOURCE sink=input-music-mic)
-  LB_2=$(pactl load-module module-loopback source=output-music.monitor sink=input-music-mic)
-  LB_3=$(pactl load-module module-loopback source=output-music.monitor sink=$OUTPUT_SINK)
-  sleep 2 
-
-  echo "Add virtual mic"
-  VIRTUAL_MIC_PAID=$(add_virtual_mic)
-
+#  echo "Changing PulseAudio configuration..."
+#  echo "Add sinks"
+#  SINK_INPUT_MUSIC_MIC=$(pactl load-module module-null-sink sink_name=input-music-mic sink_properties=device.description=input-music-mic)
+#  SINK_OUTPUT_MUSIC=$(pactl load-module module-null-sink sink_name=output-music sink_properties=device.description=output-music)
+#
+#  MIC_SOURCE=$(get_source_id $1)
+#  OUTPUT_SINK=$(get_sink_id $2) 
+#
+#  if [ -z "$MIC_SOURCE" ]; then
+#    echo "Source $1 not found"
+#    pactl unload-module $SINK_OUTPUT_MUSIC
+#    pactl unload-module $SINK_INPUT_MUSIC_MIC
+#    exit 1
+#  fi
+#
+#  if [ -z "$OUTPUT_SINK" ]; then
+#    echo "Sink $2 not found"
+#    pactl unload-module $SINK_OUTPUT_MUSIC
+#    pactl unload-module $SINK_INPUT_MUSIC_MIC
+#    exit 1
+#  fi
+#
+#  LB_1=$(pactl load-module module-loopback source=$MIC_SOURCE sink=input-music-mic)
+#  LB_2=$(pactl load-module module-loopback source=output-music.monitor sink=input-music-mic)
+#  LB_3=$(pactl load-module module-loopback source=output-music.monitor sink=$OUTPUT_SINK)
+#  sleep 2 
+#
+#  echo "Add virtual mic"
+#  VIRTUAL_MIC_PAID=$(add_virtual_mic)
+#
   echo "Press Return to shut down..."
   read -n1 -s -r
+#
+#  echo "Unloading PulseAudio modules"
+#  pactl unload-module $VIRTUAL_MIC_PAID
+#  pactl unload-module $LB_3
+#  pactl unload-module $LB_2
+#  pactl unload-module $LB_1
+#  pactl unload-module $SINK_OUTPUT_MUSIC
+#  pactl unload-module $SINK_INPUT_MUSIC_MIC
+#  sleep 1
 
-  pactl unload-module $VIRTUAL_MIC_PAID
-  pactl unload-module $LB_3
-  pactl unload-module $LB_2
-  pactl unload-module $LB_1
-  pactl unload-module $SINK_OUTPUT_MUSIC
-  pactl unload-module $SINK_INPUT_MUSIC_MIC
+  echo "Closing OBS"
+  pkill obs
+
+  echo "Reset gaps on stream WS"
+  i3-msg "workspace number $STREAM_WS"
+  i3-msg "gaps inner current set 10"
+  i3-msg "gaps outer current set 5"
+  i3-msg "gaps right current set 0"
 }
 
 function add_virtual_mic() {

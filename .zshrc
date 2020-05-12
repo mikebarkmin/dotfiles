@@ -73,6 +73,7 @@ plugins=(
   docker
   docker-compose
   pip
+  pipenv
   virtualenvwrapper
   yarn
   colored-man-pages
@@ -142,12 +143,9 @@ alias keyload='dconf load /org/gnome/desktop/wm/keybindings/ < ~/.config/keybind
 export BASE16_SHELL_HOOKS=$HOME/.config/base16-shell/hooks
 export BIBINPUTS=$HOME/Sciebo/Zotero.bib
 
+export VIRTUALENV_PYTHON=/usr/bin/python3
+
 # GO
 export GOPATH=~/Sources/go
-
-# virtualenvwrapper
-export WORKON_HOME=~/.virtualenv
-mkdir -p $WORKON_HOME
-source /usr/local/bin/virtualenvwrapper.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
