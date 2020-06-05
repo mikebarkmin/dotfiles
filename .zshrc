@@ -134,6 +134,7 @@ alias dps='docker ps'
 alias dstop='docker stop $(docker ps -aq)'
 alias dkill='docker rm $(docker stop $(docker ps -aq))'
 alias ddelete='docker rm $(docker ps -a -q) && docker rmi $(docker images -q)'
+alias drestartno='docker update --restart=no $(docker ps -a -q)'
 
 # Gnome
 # Keybindings
