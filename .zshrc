@@ -128,6 +128,7 @@ alias www='live-server'
 alias ping='ping -c 5'
 alias ipe='curl ipinfo.io/ip'
 alias cuid='python -c "import cuid; print(cuid.CuidGenerator().cuid())" | xsel'
+alias rm='rm -i'
 
 # Docker aliases
 alias dps='docker ps'

@@ -1,6 +1,6 @@
 {
   "prettier.singleQuote": true,
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "json", "css", "python", "html", "clojure"],
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "json", "css", "python", "html", "clojure", "php"],
   "python.linting.enabled": true,
   "python.jediEnabled": true,
   "python.linting.mypyEnabled": true ,

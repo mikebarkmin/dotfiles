@@ -27,7 +27,9 @@ Plug 'lambdalisue/suda.vim'
 Plug 'sjl/gundo.vim'
 
 " Themes
-Plug 'dracula/vim', {'as': 'dracula'}
+" Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'ghifarit53/tokyonight.vim'
+Plug 'itchyny/lightline.vim'
 
 " R
 Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
@@ -226,10 +228,23 @@ set shortmess+=c
 set signcolumn=yes
 set conceallevel=0
 
-let g:rainbow_active = 1
-let g:dracula_colorterm = 0
-set background=dark
-color dracula
+set termguicolors
+
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+let g:tokyonight_disable_italic_comment = 1
+
+colorscheme tokyonight
+let g:lightline = {
+  \ 'colorscheme' : 'tokyonight',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'FugitiveHead'
+  \ },
+  \ }
 
 " if filereadable(expand("~/.vimrc_background"))
 "   let base16colorspace=256

@@ -11,3 +11,4 @@ smb://fs-2.uni-due.de/simibark/ simibark auf fs-2.uni-due.de
 davs://www.wipsce.org/dav www.wipsce.org
 file:///home/mbarkmin/Nextcloud/Projekte/openpatch
 file:///home/mbarkmin/Sciebo/Universit%C3%A4t/+share/DDI/Lehre/Master/IFS IFS
+sftp://hw0544@staff.uni-due.de/homes/hw0544 hw0544 auf staff.uni-due.de
