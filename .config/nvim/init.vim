@@ -35,8 +35,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
 
 " Latex
-Plug 'lervag/vimtex'
-Plug 'mhinz/neovim-remote'
+" Plug 'lervag/vimtex'
+" Plug 'mhinz/neovim-remote'
 
 " Javascript
 Plug 'neoclide/vim-jsx-improve'
@@ -297,9 +297,30 @@ let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 " }}}
 " coc {{{
+let g:coc_global_extensions = [
+  \ "coc-eslint",
+  \ "coc-snippets",
+  \ "coc-prettier",
+  \ "coc-pairs",
+  \ "coc-json",
+  \ "coc-highlight",
+  \ "coc-java",
+  \ "coc-python",
+  \ "coc-html",
+  \ "coc-svg",
+  \ "coc-tsserver",
+  \ "coc-css",
+  \ "coc-yaml",
+  \ "coc-phpls",
+  \ "coc-r-lsp",
+  \ "coc-vimlsp",
+  \ "coc-sql",
+  \ "coc-spell-checker",
+  \ "coc-cspell-dicts",
+  \ "coc-texlab",
+  \ ]
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 set statusline^=%{coc#status()}
-
 " use <c-space>for trigger completion
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -340,6 +361,7 @@ command! Gbranch :Twiggy
 " }}}
 " Markdown {{{
 let g:mkdp_auto_start=0
+
 " }}}
 " Grammarous {{{
 let g:grammarous#languagetool_cmd = 'languagetool'

@@ -1,6 +1,6 @@
 {
   "prettier.singleQuote": true,
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "json", "css", "python", "html", "clojure", "php"],
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "json", "css", "python", "html", "clojure", "php", "latex", "bib"],
   "python.linting.enabled": true,
   "python.jediEnabled": true,
   "python.linting.mypyEnabled": true ,
@@ -9,6 +9,19 @@
   "python.formatting.provider": "black",
   "python.venvPath": "~/.virtualenv",
   "html.format.enable": true,
+  "latex.rootDirectory": ".",
+  "latex.build.outputDirectory": "build",
+  "latex.build.executable": "latexmk",
+  "latex.build.args": [
+    "-pdf",
+    "-interaction=nonstopmode",
+    "-synctex=1",
+    "-output-directory=build"
+  ],
+  "latex.build.onSave": true,
+  "latex.build.forwardSearchAfter": true,
+  "latex.forwardSearch.executable": "evince-synctex",
+  "latex.forwardSearch.args": ["-f", "%l", "%p", "\"code -g %f:%l\""],
   "coc.source.file.ignoreHidden": false,
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
