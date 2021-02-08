@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PATH_OP="~/Sources/openpatch"
+PATH_OP="~/Sources/openpatch-gitlab"
 DB_HOST="bm1048291-001.dbaas.ovh.net"
 DB_PORT="35801"
 
@@ -30,8 +30,10 @@ Usage:
 
 Options:
   mirror    Mirror remote databse
+  mirror-sqlite3 Mirror remote database to sqlite3 files
   backup    Backup current local databases
   restore   Restore current local database
+  connect   Connects to the remote database
 EOI
 }
 
@@ -119,8 +121,24 @@ db_connect() {
   mysql --host=$DB_HOST --port=$DB_PORT -u $user -p$password $1
 }
 
-db_backup_op() {
-  echo "currently not implemented"
+db_mirror_sqlite3_op() {
+  name=$(date +%Y%m%d%H%M%S)
+  mkdir -p ~/.cache/op/backup/$name
+  read -p "Enter Database User: " user
+  read -s -p "Enter Database Password: " password
+  echo ""
+  for docker_service in ${DOCKER_DB_SERVICES}; do
+    echo -e "\e[34mMirror: ${docker_service}"
+    echo -e "\e[0m"
+    DB_NAME=$(echo "${docker_service}" | cut -d- -f1)
+    SERIVCE_NAME=$(echo "${docker_service}" | cut -d- -f1)
+    backup_name=mysql.sql
+    mkdir -p ~/.cache/op/backup/$name/${SERIVCE_NAME}
+    mysqldump --host=$DB_HOST --port=$DB_PORT -u $user -p$password $DB_NAME > ~/.cache/op/backup/$name/${SERIVCE_NAME}/$backup_name
+
+    echo "Convert mysql to sqlite3"
+    ~/.local/bin/mysql2sqlite ~/.cache/op/backup/$name/$SERIVCE_NAME/$backup_name | sqlite3 ~/.cache/op/backup/$name/$SERIVCE_NAME/database.db
+  done
 }
 
 db_restore_op() {
@@ -233,6 +251,9 @@ db_op() {
   case "$1" in
     mirror)
       db_mirror_op
+      ;;
+    mirror-sqlite3)
+      db_mirror_sqlite3_op
       ;;
     backup)
       db_backup_op

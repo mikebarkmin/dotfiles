@@ -1,384 +1,222 @@
-" Plug {{{
-" ----
-call plug#begin('~/.local/share/nvim/plugged')
-
-" lsp
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-Plug 'hashivim/vim-terraform'
-Plug 'sheerun/vim-polyglot'
-
-" S for replacing case sensitive
-Plug 'tpope/vim-abolish'
-
-Plug 'honza/vim-snippets'
-
-Plug 'junegunn/fzf', { 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
-
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-" Plug 'Yggdroot/indentLine'
-" This plugin highlights patterns and ranges for Ex commands in Command-line mode.
-Plug 'markonm/traces.vim'
-Plug 'luochen1990/rainbow'
-Plug 'lambdalisue/suda.vim'
-Plug 'sjl/gundo.vim'
-
-" Themes
-" Plug 'dracula/vim', {'as': 'dracula'}
-Plug 'ghifarit53/tokyonight.vim'
-Plug 'itchyny/lightline.vim'
-
-" R
-Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
-
-" Latex
-" Plug 'lervag/vimtex'
-" Plug 'mhinz/neovim-remote'
-
-" Javascript
-Plug 'neoclide/vim-jsx-improve'
-
-" Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-
-" Racket
-Plug 'wlangstroth/vim-racket'
-
-" Clojure
-Plug 'eraserhd/parinfer-rust'
-Plug 'tpope/vim-fireplace'
-
-" Git
-Plug 'tpope/vim-fugitive'
-Plug 'shumphrey/fugitive-gitlab.vim'
-Plug 'sodapopcan/vim-twiggy'
-Plug 'airblade/vim-gitgutter'
-
-" Spellchecking
-Plug 'rhysd/vim-grammarous'
-
+call plug#begin('~/.vim/plugged')
+  Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'yuezk/vim-js'
+  Plug 'maxmellon/vim-jsx-pretty'
+  Plug 'itchyny/vim-gitbranch'
+  Plug 'itchyny/lightline.vim'
+  Plug 'szw/vim-maximizer'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'kassio/neoterm'
+  Plug 'tpope/vim-commentary'
+  Plug 'sbdchd/neoformat'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'tpope/vim-fugitive'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
+  Plug 'vim-test/vim-test'
+  Plug 'puremourning/vimspector'
+  Plug 'vimwiki/vimwiki'
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-surround'
+  Plug 'jiangmiao/auto-pairs'
 call plug#end()
-" }}}
 
-" Global Mappings {{{
-" ---------------
-let g:mapleader="\<Space>"
-let g:maplocalleader=','
-nnoremap <leader>th :set hlsearch!<CR>
-nnoremap <leader>tf :NERDTreeToggle<CR>
-nnoremap <leader>tu :GundoToggle<CR>
-nnoremap <leader>fb :Buffers<CR>
-nnoremap <leader>ft :Tags<CR>
-nnoremap <leader>fc :Commits<CR>
-nnoremap <leader>fg :GFiles<CR>
-nnoremap <leader>ff :Files<CR>
-nnoremap <leader>fm :Marks<CR>
-" nnoremap <leader>fa :Ag<CR>
-noremap <silent> <Leader>w :call ToggleWrap()<CR>
-nnoremap <leader>ev :vsp ~/.config/nvim/init.vim<CR>
-nnoremap <leader>sv :source ~/.config/nvim/init.vim <bar> :doautocmd BufRead<CR>
-tnoremap <Esc> <C-\><C-n>
-
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
-
-nnoremap <leader>fa :GGrep<CR>
-
-function! ToggleWrap()
-  if &wrap
-    echo "Wrap OFF"
-    setlocal nowrap
-    set virtualedit=all
-    silent! nunmap <buffer> <Up>
-    silent! nunmap <buffer> <Down>
-    silent! nunmap <buffer> <Home>
-    silent! nunmap <buffer> <End>
-    silent! iunmap <buffer> <Up>
-    silent! iunmap <buffer> <Down>
-    silent! iunmap <buffer> <Home>
-    silent! iunmap <buffer> <End>
-  else
-    echo "Wrap ON"
-    setlocal wrap linebreak nolist
-    set virtualedit=
-    setlocal display+=lastline
-    noremap  <buffer> <silent> <Up>   gk
-    noremap  <buffer> <silent> <Down> gj
-    noremap  <buffer> <silent> <Home> g<Home>
-    noremap  <buffer> <silent> <End>  g<End>
-    inoremap <buffer> <silent> <Up>   <C-o>gk
-    inoremap <buffer> <silent> <Down> <C-o>gj
-    inoremap <buffer> <silent> <Home> <C-o>g<Home>
-    inoremap <buffer> <silent> <End>  <C-o>g<End>
-    noremap  <buffer> <silent> k gk
-    noremap  <buffer> <silent> j gj
-    noremap  <buffer> <silent> 0 g0
-    noremap  <buffer> <silent> $ g$
-  endif
-endfunction
-
-" folding
-nnoremap <expr> <f2> &foldlevel ? 'zM' :'zR'
-nnoremap <expr> <f3> 'za'
-
-" quickfix
-map <C-j> :cn<CR>
-map <C-k> :cp<CR>
-map <leader>ch :noh<CR>
-
-" }}}
-
-" General Settings {{{
-" -----------------------------------------------------------------------------
-" General {{{
-" -------
-
-set errorbells
-set visualbell
-set synmaxcol=1000
-set splitbelow
-set splitright
-set mouse=a
-"
-" autoread and autowrite
-set hidden
-set nobackup
-set noswapfile
-set nowritebackup
-set autoread
-
-" persistent-undo
-set undodir=~/.config/nvim/undo
-set undofile
-
-"
-" highlight merge conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" Spell Check
-" let b:myLang=0
-" let g:myLangList=["nospell","de_de","en_gb"]
-" 
-" function! ToggleSpell()
-"   let b:myLang=b:myLang+1
-"   if b:myLang>=len(g:myLangList) | let b:myLang=0 | endif
-"   if b:myLang==0
-"     setlocal nospell
-"   else
-"     execute "setlocal spell spelllang=".get(g:myLangList, b:myLang)
-"   endif
-"   echo "spell checking language:" g:myLangList[b:myLang]
-" endfunction
-" 
-" set complete+=kspell
-
-
-" autocd to current dir of file
-set autochdir
-
-function! PrintFile(fname)
-   call system("gtklp " . a:fname)
-   call delete(a:fname)
-   return v:shell_error
-endfunction
-set printexpr=PrintFile(v:fname_in)
-let g:sudo_askpass='/usr/lib/openssh/gnome-ssh-askpass'
-
-set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
-
-" }}}
-" Tabs and Indents {{{
-" ----------------
-set textwidth=0
-set wrapmargin=0
-set nowrap
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set smarttab
-set autoindent
-set smartindent
-set shiftround
-set expandtab
-
-" }}}
-" Searching {{{
-" ---------
-set ignorecase
-set smartcase
-set hlsearch
-
-" }}}
-" UI {{{
-" --
-set scrolloff=2
-set sidescrolloff=5
-set number relativenumber
-set list
-set laststatus=2
-set colorcolumn=80
-set cmdheight=2
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
-set conceallevel=0
-
-set termguicolors
-
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
-let g:tokyonight_disable_italic_comment = 1
-
-colorscheme tokyonight
-let g:lightline = {
-  \ 'colorscheme' : 'tokyonight',
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-  \ },
-  \ 'component_function': {
-  \   'gitbranch': 'FugitiveHead'
-  \ },
-  \ }
-
-" if filereadable(expand("~/.vimrc_background"))
-"   let base16colorspace=256
-"   source ~/.vimrc_background
+" default options
+set completeopt=menuone,noinsert,noselect " better autocomplete options
+set mouse=a " if I accidentally use the mouse
+set splitright " splits to the right
+set splitbelow " splits below
+set expandtab " space characters instead of tab
+set tabstop=2 " tab equals 2 spaces
+set shiftwidth=2 " indentation
+set number " show absolute line numbers
+set ignorecase " search case insensitive
+set smartcase " search via smartcase
+set incsearch " search incremental
+set diffopt+=vertical " starts diff mode in vertical split
+set hidden " allow hidden files
+set nobackup " don't create backup files
+set nowritebackup " don't create backup files
+set cmdheight=1 " only one line for commands
+set shortmess+=c " don't need to press enter so often
+set signcolumn=yes " add a column for sings (e.g. GitGutter, LSP, ...)
+set updatetime=120 " time until update
+set undofile " persists undo tree
+set scrolloff=10 " keep lines above and below
+filetype plugin indent on " enable detection, plugins and indents
+let mapleader = " " " space as leader key
+" if (has("termguicolors"))
+"   set termguicolors " better colors, but makes it very slow!
 " endif
+let g:netrw_banner=0 " disable banner in netrw
+let g:netrw_liststyle=3 " tree view in netrw
+let g:markdown_fenced_languages = ['javascript', 'js=javascript', 'json=javascript', 'python', 'typescript'] " syntax highlighting in markdown
+nnoremap <leader>v :e $MYVIMRC<CR>
+nnoremap <esc><esc> :noh<CR>
+nnoremap <leader>tf :Lexplore<CR>
+map q <Nop>
 
+" netrw like nerdtree
+com!  -nargs=* -bar -bang -complete=dir  Lexplore  call netrw#Lexplore(<q-args>, <bang>0)
 
-" }}}
-" Folding {{{
-if has('folding')
-  set foldenable
-  set foldmethod=syntax
-  set foldlevelstart=99
-  set foldtext=FoldText()
+fun! Lexplore(dir, right)
+  if exists("t:netrw_lexbufnr")
+  " close down netrw explorer window
+  let lexwinnr = bufwinnr(t:netrw_lexbufnr)
+  if lexwinnr != -1
+    let curwin = winnr()
+    exe lexwinnr."wincmd w"
+    close
+    exe curwin."wincmd w"
+  endif
+  unlet t:netrw_lexbufnr
+
+  else
+    " open netrw explorer window in the dir of current file
+    " (even on remote files)
+    let path = substitute(exists("b:netrw_curdir")? b:netrw_curdir : expand("%:p"), '^\(.*[/\\]\)[^/\\]*$','\1','e')
+    exe (a:right? "botright" : "topleft")." vertical ".((g:netrw_winsize > 0)? (g:netrw_winsize*winwidth(0))/100 : -g:netrw_winsize) . " new"
+    if a:dir != ""
+      exe "Explore ".a:dir
+    else
+      exe "Explore ".path
+    endif
+    setlocal winfixwidth
+    let t:netrw_lexbufnr = bufnr("%")
+  endif
+endfun
+
+let g:netrw_winsize = -28 " absolute width of netrw window
+let g:netrw_banner = 0 " do not display info on the top of window
+let g:netrw_liststyle = 3 " tree-view
+let g:netrw_sort_sequence = '[\/]$,*' " sort is affecting only: directories on the top, files below
+let g:netrw_browse_split = 4 " use the previous window to open file
+
+" dracula/vim
+let g:dracula_colorterm = 0
+syntax enable
+colorscheme dracula
+
+" itchyny/lightline.vim and itchyny/vim-gitbranch
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'gitbranch#name'
+      \ },
+      \ 'colorscheme': 'dracula',
+      \ }
+
+" szw/vim-maximizer
+nnoremap <leader>m :MaximizerToggle!<CR>
+
+" kassio/neoterm
+let g:neoterm_default_mod = 'vertical'
+let g:neoterm_size = 100
+let g:neoterm_autoinsert = 1
+let g:neoterm_autoscroll = 1
+let g:neoterm_term_per_tab = 1
+nnoremap <c-q> :Ttoggle<CR>
+inoremap <c-q> <Esc>:Ttoggle<CR>
+tnoremap <c-q> <c-\><c-n>:Ttoggle<CR>
+nnoremap <leader>x :TREPLSendLine<CR>
+vnoremap <leader>x :TREPLSendSelection<CR>
+
+" sbdchd/neoformat
+nnoremap <leader>F :Neoformat<CR>
+let g:neoformat_enabled_python = ['black']
+let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_enabled_markdown = ['prettier']
+let g:neoformat_enabled_typescript = ['prettier']
+let g:neoformat_enabled_json = ['prettier']
+
+" junegunn/fzf.vim
+nnoremap <leader><space> :GFiles<CR>
+nnoremap <leader>FF :Files<CR>
+nnoremap <leader>cc :History:<CR>
+nnoremap <leader>ff :Rg<CR>
+nnoremap <leader>fb :Buffers<CR>
+inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
+    \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
+    \ fzf#wrap({'dir': expand('%:p:h')}))
+if has('nvim')
+  au! TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+  au! FileType fzf tunmap <buffer> <Esc>
 endif
 
-" Improved Vim fold-text
-" See: http://www.gregsexton.org/2011/03/improving-the-text-displayed-in-a-fold/
-function! FoldText()
-  " Get first non-blank line
-  let fs = v:foldstart
-  while getline(fs) =~? '^\s*$' | let fs = nextnonblank(fs + 1)
-  endwhile
-  if fs > v:foldend
-    let line = getline(v:foldstart)
-  else
-    let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
-  endif
+" tpope/vim-fugitive
+nnoremap <leader>gg :G<cr>
+nnoremap <leader>gd :Gdiff master<cr>
+nnoremap <leader>gl :G log -100<cr>
 
-  let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
-  let foldSize = 1 + v:foldend - v:foldstart
-  let foldSizeStr = ' ' . foldSize . ' lines '
-  let foldLevelStr = repeat('+--', v:foldlevel)
-  let lineCount = line('$')
-  let foldPercentage = printf('[%.1f', (foldSize*1.0)/lineCount*100) . '%] '
-  let expansionString = repeat('.', w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
-  return line . expansionString . foldSizeStr . foldPercentage . foldLevelStr
-endfunction
-" }}}
-" Abbreviations {{{
-ab sus Schülerinnen und Schüler
-ab lul Lehrerinnen und Lehrer
-" }}}
-" }}}
-
-" Plugins {{{
-" -------
-" terraform {{{
-let g:terraform_align=1
-let g:terraform_fmt_on_save=1
-" }}}
-" coc {{{
-let g:coc_global_extensions = [
-  \ "coc-eslint",
-  \ "coc-snippets",
-  \ "coc-prettier",
-  \ "coc-pairs",
-  \ "coc-json",
-  \ "coc-highlight",
-  \ "coc-java",
-  \ "coc-python",
-  \ "coc-html",
-  \ "coc-svg",
-  \ "coc-tsserver",
-  \ "coc-css",
-  \ "coc-yaml",
-  \ "coc-phpls",
-  \ "coc-r-lsp",
-  \ "coc-vimlsp",
-  \ "coc-sql",
-  \ "coc-spell-checker",
-  \ "coc-cspell-dicts",
-  \ "coc-texlab",
-  \ ]
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-set statusline^=%{coc#status()}
-" use <c-space>for trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" neovim/nvim-lspconfig and nvim-lua/completion-nvim
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Remap for format selected region
-xmap <leader><F2>  <Plug>(coc-format-selected)
-nmap <leader><F2>  <Plug>(coc-format-selected)
+autocmd BufEnter * lua require'completion'.on_attach()
+lua require'lspconfig'.tsserver.setup{ }
+lua require'lspconfig'.pyright.setup{ }
+lua require'lspconfig'.gopls.setup{ }
 
-vmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
-autocmd CursorHold * silent call CocActionAsync('highlight')
-" }}}
-" suda {{{
-let g:suda_smart_edit = 1
-" }}}
-" Vimtex {{{
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gh     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gH    <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gR    <cmd>lua vim.lsp.buf.rename()<CR>
 
-let g:vimtex_view_method = 'zathura'
-let g:vimtex_compiler_progname = 'nvr'
-let g:vimtex_complete_enabled = 1
-let g:vimtex_complete_bib = {
-      \ 'simple': 1,
-      \ 'recursive': 1,
-      \}
-let g:vimtex_compiler_latexmk = {
-        \ 'background' : 1,
-        \ 'build_dir' : 'build',
-        \ 'callback' : 1,
-        \ 'continuous' : 1,
-        \ 'executable' : 'latexmk'
-        \}
+" vim-test/vim-test
+nnoremap <silent> tt :TestNearest<CR>
+nnoremap <silent> tf :TestFile<CR>
+nnoremap <silent> ts :TestSuite<CR>
+nnoremap <silent> t_ :TestLast<CR>
+let test#strategy = "neovim"
+let test#neovim#term_position = "vertical"
 
-" }}}
-" Twiggy {{{
-command! Gbranch :Twiggy
+" puremourning/vimspector
+fun! GotoWindow(id)
+  :call win_gotoid(a:id)
+endfun
+func! AddToWatch()
+  let word = expand("<cexpr>")
+  call vimspector#AddWatch(word)
+endfunction
+let g:vimspector_base_dir = expand('$HOME/.config/vimspector-config')
+let g:vimspector_sidebar_width = 120
+let g:vimspector_bottombar_height = 0
+nnoremap <leader>da :call vimspector#Launch()<CR>
+nnoremap <leader>dd :TestNearest -strategy=jest<CR>
+nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
+nnoremap <leader>d? :call AddToWatch()<CR>
+nnoremap <leader>dx :call vimspector#Reset()<CR>
+nnoremap <leader>dX :call vimspector#ClearBreakpoints()<CR>
+nnoremap <S-k> :call vimspector#StepOut()<CR>
+nnoremap <S-l> :call vimspector#StepInto()<CR>
+nnoremap <S-j> :call vimspector#StepOver()<CR>
+nnoremap <leader>d_ :call vimspector#Restart()<CR>
+nnoremap <leader>dn :call vimspector#Continue()<CR>
+nnoremap <leader>drc :call vimspector#RunToCursor()<CR>
+nnoremap <leader>dh :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <leader>de :call vimspector#ToggleConditionalBreakpoint()<CR>
+let g:vimspector_sign_priority = {
+  \    'vimspectorBP':         998,
+  \    'vimspectorBPCond':     997,
+  \    'vimspectorBPDisabled': 996,
+  \    'vimspectorPC':         999,
+  \ }
 
-" }}}
-" Markdown {{{
-let g:mkdp_auto_start=0
-
-" }}}
-" Grammarous {{{
-let g:grammarous#languagetool_cmd = 'languagetool'
-nmap <leader>gp <Plug>(grammarous-move-to-previous-error)
-nmap <leader>gn <Plug>(grammarous-move-to-next-error)
-nmap <leader>gm <Plug>(grammarous-move-to-info-window)
-nmap <leader>go <Plug>(grammarous-open-info-window)
-nmap <leader>gc <Plug>(grammarous-close-info-window)
-nmap <leader>gf <Plug>(grammarous-fixit)
-nmap <leader>gr <Plug>(grammarous-remove-error)
-nmap <silent> <leader>gsd :GrammarousCheck --lang=de<CR>
-nmap <silent> <leader>gse :GrammarousCheck --lang=en<CR>
-nmap <leader>gq <Plug>(grammarous-reset)
-" }}}
-" polyglot {{{
-let g:polyglot_disabled = ['latex']
-" }}}
-" }}}
-
-" vim: set foldmethod=marker ts=2 sw=2 foldlevel=0 tw=80 :
+" vim-test/vim-test and puremourning/vimspector
+function! JestStrategy(cmd)
+  let testName = matchlist(a:cmd, '\v -t ''(.*)''')[1]
+  call vimspector#LaunchWithSettings( #{ configuration: 'jest', TestName: testName } )
+endfunction      
+let g:test#custom_strategies = {'jest': function('JestStrategy')}

@@ -1,5 +1,4 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:/usr/local/bin:$PATH:$HOME/Sources/go/bin
+eval `dircolors /home/mbarkmin/.dir_colors/dircolors`
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/mbarkmin/.oh-my-zsh
@@ -74,11 +73,14 @@ plugins=(
   docker-compose
   pip
   pipenv
-  virtualenvwrapper
+  poetry
   yarn
   colored-man-pages
+  colorize
   httpie
+  tmux
   command-not-found
+  vscode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -88,8 +90,8 @@ if [[ $TILIX_ID ]]; then
 fi
 
 # Base16
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# BASE16_SHELL=$HOME/.config/base16-shell/
+# [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # User configuration
 
@@ -116,25 +118,21 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+ZSH_TMUX_AUTOSTART=1
 alias uc="uncommitted ~/Sources"
 alias vim=nvim
 alias senv="set -a; source .env; set +a"
-alias com="cd ~/Sources/commoop"
 alias s="cd ~/Sources"
 alias www='live-server'
 alias ping='ping -c 5'
 alias ipe='curl ipinfo.io/ip'
-alias cuid='python -c "import cuid; print(cuid.CuidGenerator().cuid())" | xsel'
 alias rm='rm -i'
 
 # Docker aliases
 alias dps='docker ps'
 alias dstop='docker stop $(docker ps -aq)'
 alias dkill='docker rm $(docker stop $(docker ps -aq))'
-alias ddelete='docker rm $(docker ps -a -q) && docker rmi $(docker images -q)'
+alias ddelete='docker rm -vf $(docker ps -a -q) && docker rmi -f $(docker images -a -q)'
 alias drestartno='docker update --restart=no $(docker ps -a -q)'
 
 # Gnome
@@ -145,9 +143,15 @@ alias keyload='dconf load /org/gnome/desktop/wm/keybindings/ < ~/.config/keybind
 export BASE16_SHELL_HOOKS=$HOME/.config/base16-shell/hooks
 export BIBINPUTS=$HOME/Sciebo/Zotero.bib
 
+# pipenv use local venv folder
+export PIPENV_VENV_IN_PROJECT="enabled"
+
 export VIRTUALENV_PYTHON=/usr/bin/python3
 
 # GO
 export GOPATH=~/Sources/go
+
+# Use fd
+export FZF_DEFAULT_COMMAND='fdfind --type f'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

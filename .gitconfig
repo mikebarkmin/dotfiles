@@ -1,9 +1,10 @@
 [user]
-	email = mike.barkmin@uni-due.de
+	email = mike@barkmin.eu
 	name = Mike Barkmin
-	signingkey = DB03AD0D8AF96072
+	signingkey = B29BB3755EB40BF4
 [core]
 	excludesfile = ~/.gitignore
+	quotepath = false
 [commit]
   verbose = true
 	gpgsign = true
@@ -13,3 +14,5 @@
 	templatedir = ~/.git_template
 [alias]
 	ctags = !.git/hooks/ctags
+[pull]
+	rebase = true
